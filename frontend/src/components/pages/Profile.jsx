@@ -92,7 +92,7 @@ const Profile = () => {
         <h2 className="font-bold lg:text-2xl md:text-2xl sm:text-2xl bg-red-700 text-white py-1 px-4 rounded-md  text-center mb-5">
           #Applied Jobs
         </h2>
-        <div className="border-2 border-gray-100 rounded-2xl shadow-1xl ">
+        <div className="">
           <AppliedJobTable />
         </div>
       </div>
