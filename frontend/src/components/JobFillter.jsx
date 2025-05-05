@@ -34,7 +34,6 @@ const JobFillter = () => {
 
   // filter
 
-  console.log(searchValue);
 
   const selectHandler = (value) => {
     dispatch(setSelectValue(value));
