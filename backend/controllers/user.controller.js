@@ -106,7 +106,7 @@ export const login = async (req, res) => {
     };
 
     const token = jwt.sign(tokenDate, process.env.SECRET_KEY, {
-      expiresIn: "1d",
+      expiresIn: "7d",
     });
 
     //   token to store in cookie
@@ -123,9 +123,9 @@ export const login = async (req, res) => {
     return res
       .status(200)
       .cookie("token", token, {
-        maxAge: 1 * 24 * 60 * 60 * 1000,
         httpsOnly: true,
-        sameSite: "strict",
+        sameSite: "none",
+        secure: true,
       })
       .json({
         message: `welcome back ${user.fullName}`,
