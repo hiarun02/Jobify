@@ -88,13 +88,10 @@ const JobDeatils = () => {
 
             <div className="mb-3">
               <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                {singalJob?.description}
+                Job Description :
               </h2>
               <p className="text-gray-700 leading-relaxed">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
-                quas velit accusamus dolore! In qui excepturi laboriosam cum
-                nisi, esse voluptate, laudantium pariatur reiciendis quibusdam
-                corrupti impedit dicta doloribus amet!
+                {singalJob?.description}
               </p>
             </div>
             <div className="mb-6">
