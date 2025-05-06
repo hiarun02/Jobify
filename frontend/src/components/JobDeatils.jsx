@@ -3,8 +3,7 @@ import {useEffect, useState} from "react";
 import {Button} from "./ui/button";
 import {useParams} from "react-router-dom";
 import axios from "axios";
-import {APPLICATION_API_END_POINT,
-   JOB_API_END_POINT} from "@/utils/constant";
+import {APPLICATION_API_END_POINT, JOB_API_END_POINT} from "@/utils/constant";
 import {useDispatch, useSelector} from "react-redux";
 import {setSingalJob} from "@/redux/jobSlice";
 import {toast} from "sonner";
@@ -75,11 +74,11 @@ const JobDeatils = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-gray-700 mb-6">
               <div className="bg-gray-100 rounded-xl p-4">
                 <p className="font-medium">Job Type</p>
-                <p className="text-gray-600">Full-time</p>
+                <p className="text-gray-600">{singalJob?.jobType}</p>
               </div>
               <div className="bg-gray-100 rounded-xl p-4">
                 <p className="font-medium">Salary</p>
-                <p className="text-gray-600">$80k – $100k</p>
+                <p className="text-gray-600">{singalJob?.salary}</p>
               </div>
               <div className="bg-gray-100 rounded-xl p-4">
                 <p className="font-medium">Position</p>
@@ -89,7 +88,7 @@ const JobDeatils = () => {
 
             <div className="mb-3">
               <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                Job Description
+                {singalJob?.description}
               </h2>
               <p className="text-gray-700 leading-relaxed">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
