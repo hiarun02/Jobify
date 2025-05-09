@@ -17,17 +17,17 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
 //production, development
-const NODE_ENV = development;
+const mode = development;
 
 // CORS configuration
-if (NODE_ENV === "development") {
+if (mode === "development") {
   app.use(
     cors({
       origin: process.env.CLIENT_URL,
       credentials: true,
     })
   );
-} else if (NODE_ENV === "production") {
+} else if (mode === "production") {
   app.use(
     cors({
       origin: "https://hi-jobify.vercel.app/",
