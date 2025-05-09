@@ -16,23 +16,24 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
+//production, development
+const NODE_ENV = development;
+
 // CORS configuration
-if (process.env.NODE_ENV === "development") {
+if (NODE_ENV === "development") {
   app.use(
     cors({
       origin: process.env.CLIENT_URL,
       credentials: true,
     })
   );
-  console.log("CORS enabled for development");
-} else if (process.env.NODE_ENV === "production") {
+} else if (NODE_ENV === "production") {
   app.use(
     cors({
       origin: "https://hi-jobify.vercel.app/",
       credentials: true,
     })
   );
-  console.log("CORS enabled for production");
 }
 
 let PORT = process.env.PORT || 3000;
