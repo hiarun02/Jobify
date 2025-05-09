@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
 //production, development
-const mode = "development";
+const mode = "production";
 
 // CORS configuration
 if (mode === "development") {
@@ -30,7 +30,7 @@ if (mode === "development") {
 } else if (mode === "production") {
   app.use(
     cors({
-      origin: "https://hi-jobify.vercel.app/",
+      origin: "https://hi-jobify.vercel.app",
       credentials: true,
     })
   );
