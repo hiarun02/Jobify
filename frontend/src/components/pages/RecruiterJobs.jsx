@@ -12,6 +12,7 @@ const RecruiterJobs = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useGetAllAdminJob();
+  
   useEffect(() => {
     dispatch(setJobSearchInput(input));
   }, [input]);

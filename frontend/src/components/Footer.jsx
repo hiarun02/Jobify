@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 const Footer = () => {
   return (
     <>
@@ -13,12 +15,12 @@ const Footer = () => {
               step towards your dream career.
             </p>
 
-            <a
-              href="#"
+            <Link
+              to="/jobs"
               class="mt-8 inline-block rounded-full border border-red-700 px-12 py-3 text-sm font-medium text-red-600 hover:bg-red-700 hover:text-white focus:ring-3 focus:outline-hidden"
             >
               Explore
-            </a>
+            </Link>
           </div>
 
           <div class="mt-8 sm:flex sm:items-center sm:justify-between lg:mt-">

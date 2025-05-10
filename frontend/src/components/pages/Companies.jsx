@@ -13,7 +13,6 @@ const Companies = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useGetAllCompanies();
-
   useEffect(() => {
     dispatch(setsearchCompany(input));
   }, [input]);
