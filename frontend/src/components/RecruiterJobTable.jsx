@@ -29,7 +29,7 @@ const RecruiterJobTable = () => {
         return job?.title?.toLowerCase().includes(jobSearchInput.toLowerCase());
       });
     setFilterJobs(filteredJobs);
-  }, [jobSearchInput]);
+  }, [jobSearchInput, adminAllJobs]);
 
   return (
     <>

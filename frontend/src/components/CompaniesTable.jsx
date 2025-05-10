@@ -32,7 +32,7 @@ const CompaniesTable = () => {
           .includes(searchCompany.toLowerCase());
       });
     setFilterCompanies(filteredCompany);
-  }, [searchCompany]);
+  }, [searchCompany, companies]);
 
   return (
     <>
