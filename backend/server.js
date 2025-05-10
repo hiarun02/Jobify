@@ -30,7 +30,7 @@ if (mode === "development") {
 } else if (mode === "production") {
   app.use(
     cors({
-      origin: "https://hi-jobify.vercel.app/",
+      origin: "https://hi-jobify.vercel.app",
       credentials: true,
     })
   );
