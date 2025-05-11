@@ -36,12 +36,15 @@ const JobCard = ({job}) => {
           </Button>
           <div>
             <h2 className="font-medium text-lg">{job?.company?.name}</h2>
-            <p className="text-sm text-gray-500">India</p>
+            <p className="text-sm text-gray-500">{job?.location}</p>
           </div>
         </div>
         <div className="pt-2 pb-2">
           <h1 className="text-lg font-bold">{job?.title}</h1>
-          <p className="text-sm">{job?.description}</p>
+          <p className="text-sm">
+            {job?.description?.length > 50 &&
+              `${job?.description.slice(0, 100)}...`}
+          </p>
         </div>
         <div className="my-2 mt-2 flex gap-3 text-red-700">
           <Badge variant="ghost">{job?.jobType}</Badge>

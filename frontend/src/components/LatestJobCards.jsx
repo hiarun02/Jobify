@@ -23,7 +23,10 @@ const LatestJobCards = ({job, key}) => {
       </div>
       <div className="pt-2 pb-2">
         <h1 className="text-lg font-bold">{job?.title}</h1>
-        <p className="text-sm">{job?.description}</p>
+        <p className="text-sm">
+          {job?.description?.length > 50 &&
+            `${job?.description.slice(0, 100)}...`}
+        </p>
       </div>
       <div className="my-2 mt-2 flex gap-3 text-red-700">
         <Badge variant="ghost">{job?.jobType}</Badge>
