@@ -16,7 +16,7 @@ const fillterList = [
   },
   {
     fillterType: "Location Wise",
-    fillterData: ["Noida", "Banglore", "Hadrabad"],
+    fillterData: ["india", "delhi", "bangalore", "mumbai"],
   },
 ];
 
@@ -33,7 +33,6 @@ const JobFillter = () => {
   }, [searchValue]);
 
   // filter
-
 
   const selectHandler = (value) => {
     dispatch(setSelectValue(value));
