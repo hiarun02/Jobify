@@ -36,7 +36,7 @@ const CompaniesTable = () => {
 
   return (
     <>
-      <div className="py-5 ">
+      <div className="py-2">
         <Label className="text-2xl font-bold">Registered Companies </Label>
       </div>
       <div className="border rounded-2xl overflow-hidden p-1 bg-gray-50">

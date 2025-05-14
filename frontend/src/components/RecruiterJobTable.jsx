@@ -69,7 +69,9 @@ const RecruiterJobTable = () => {
                             Applicants
                           </span>
                         </button>
-        
+                        <button>
+                          <span className="hover:underline">Edit</span>
+                        </button>
                       </div>
                     </PopoverContent>
                   </Popover>
