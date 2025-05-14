@@ -3,16 +3,17 @@ import {Button} from "../ui/button";
 import RecruiterJobTable from "../RecruiterJobTable";
 import {useEffect, useState} from "react";
 import useGetAllAdminJob from "@/hooks/useGetAllAdminJob";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setJobSearchInput} from "@/redux/jobSlice";
 import {useNavigate} from "react-router-dom";
 
 const RecruiterJobs = () => {
+  const {adminAllJobs} = useSelector((store) => store.jobs);
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useGetAllAdminJob();
-  
+
   useEffect(() => {
     dispatch(setJobSearchInput(input));
   }, [input]);
@@ -38,9 +39,15 @@ const RecruiterJobs = () => {
         </div>
 
         {/* Job table */}
-        <div>
-          <RecruiterJobTable />
-        </div>
+        {adminAllJobs.length === 0 ? (
+          <span className="text-xl font-mono text-center">
+            Job Not Found, Create Your First Job!
+          </span>
+        ) : (
+          <div>
+            <RecruiterJobTable />
+          </div>
+        )}
       </div>
     </>
   );
