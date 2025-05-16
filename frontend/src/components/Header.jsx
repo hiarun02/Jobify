@@ -6,9 +6,8 @@ import {Avatar, AvatarImage} from "./ui/avatar";
 import {Button} from "./ui/button";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "sonner";
-import axios from "axios";
-import {USER_API_END_POINT} from "@/utils/constant";
 import {setUser} from "@/redux/authSlice";
+import {api} from "@/api/api";
 
 const Header = () => {
   const UserNavLinks = [
@@ -33,7 +32,7 @@ const Header = () => {
 
   const logoutHandler = async () => {
     try {
-      const res = await axios.get(`${USER_API_END_POINT}/logout`, {
+      const res = await api.get(`/api/user/logout`, {
         withCredentials: true,
       });
 

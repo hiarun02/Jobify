@@ -3,9 +3,8 @@ import {RadioGroup} from "../ui/radio-group";
 import {Label} from "../ui/label";
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
-import axios from "axios";
-import {USER_API_END_POINT} from "@/utils/constant";
 import {toast} from "sonner";
+import {api} from "@/api/api";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -45,7 +44,7 @@ const Register = () => {
     if (input.profile) formData.append("file", input.profile);
 
     try {
-      const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
+      const res = await api.post(`/api/user/register`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

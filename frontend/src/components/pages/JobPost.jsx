@@ -12,9 +12,8 @@ import {
 } from "@/components/ui/select";
 import {useSelector} from "react-redux";
 import {SelectGroup} from "@radix-ui/react-select";
-import axios from "axios";
-import {JOB_API_END_POINT} from "@/utils/constant";
 import {toast} from "sonner";
+import {api} from "@/api/api";
 
 const JobPost = () => {
   const {companies} = useSelector((store) => store.company);
@@ -54,7 +53,7 @@ const JobPost = () => {
   const submitFromHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {
+      const res = await api.post(`/api/job/post`, input, {
         headers: {
           "Content-Type": "application/json",
         },

@@ -10,10 +10,9 @@ import {Label} from "./ui/label";
 import {Input} from "./ui/input";
 import {Button} from "./ui/button";
 import {useDispatch, useSelector} from "react-redux";
-import axios from "axios";
-import {USER_API_END_POINT} from "@/utils/constant";
 import {toast} from "sonner";
 import {setUser} from "@/redux/authSlice";
+import {api} from "@/api/api";
 
 const UpdateProfileDialog = ({open, setOpen}) => {
   // user form redux store
@@ -53,16 +52,12 @@ const UpdateProfileDialog = ({open, setOpen}) => {
     }
 
     try {
-      const res = await axios.post(
-        `${USER_API_END_POINT}/profile/update`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          withCredentials: true,
-        }
-      );
+      const res = await api.post(`$/api/user/profile/update`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      });
 
       if (res.data.success) {
         dispatch(setUser(res.data.user));
