@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
 //production, development
-const mode = "production";
+const mode = process.env.MODE;
 
 // CORS configuration
 if (mode === "development") {
