@@ -4,11 +4,10 @@ import {ArrowLeft} from "lucide-react";
 import {Label} from "../ui/label";
 import {Input} from "../ui/input";
 import {useNavigate, useParams} from "react-router-dom";
-import axios from "axios";
-import {COMPANY_API_END_POINT} from "@/utils/constant";
 import {toast} from "sonner";
 import {useSelector} from "react-redux";
 import useGetSingalCompanyById from "@/hooks/useGetSIngalCompanyById";
+import {api} from "@/api/api";
 
 const CompanySetup = () => {
   const params = useParams();
@@ -47,16 +46,12 @@ const CompanySetup = () => {
     }
 
     try {
-      const res = await axios.put(
-        `${COMPANY_API_END_POINT}/update/${params.id}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          withCredentials: true,
-        }
-      );
+      const res = await api.put(`/api/company/update/${params.id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      });
 
       if (res.data.success) {
         toast.success(res.data.message);

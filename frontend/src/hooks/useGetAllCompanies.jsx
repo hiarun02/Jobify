@@ -1,15 +1,14 @@
-import {COMPANY_API_END_POINT} from "@/utils/constant";
 import {useEffect} from "react";
-import axios from "axios";
 import {setCompanies} from "@/redux/companySlice";
 import {useDispatch} from "react-redux";
+import {api} from "@/api/api";
 
 const useGetAllCompanies = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const res = await axios.get(`${COMPANY_API_END_POINT}/get`, {
+        const res = await api.get(`/api/company/get`, {
           withCredentials: true,
         });
 

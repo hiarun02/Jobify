@@ -3,11 +3,10 @@ import {Button} from "../ui/button";
 import {Input} from "../ui/input";
 import {useState} from "react";
 import {toast} from "sonner";
-import axios from "axios";
-import {COMPANY_API_END_POINT} from "@/utils/constant";
 import {useDispatch} from "react-redux";
 import {Label} from "../ui/label";
 import {setSingalCompany} from "@/redux/companySlice";
+import {api} from "@/api/api";
 
 const CompanyCreate = () => {
   const navigate = useNavigate();
@@ -17,8 +16,8 @@ const CompanyCreate = () => {
 
   const registerCompany = async () => {
     try {
-      const res = await axios.post(
-        `${COMPANY_API_END_POINT}/register`,
+      const res = await api.post(
+        `/api/company/register`,
         {companyName},
         {
           headers: {

@@ -12,7 +12,7 @@ import {MoreHorizontal} from "lucide-react";
 import {useSelector} from "react-redux";
 import {toast} from "sonner";
 import axios from "axios";
-import {APPLICATION_API_END_POINT} from "@/utils/constant";
+import {api} from "@/api/api";
 
 const ApplicantsTable = () => {
   const statusArr = ["accepted", "rejected"];
@@ -20,10 +20,9 @@ const ApplicantsTable = () => {
   const statusHandler = async (status, id) => {
     try {
       axios.defaults.withCredentials = true;
-      const res = await axios.post(
-        `${APPLICATION_API_END_POINT}/status/${id}/update`,
-        {status}
-      );
+      const res = await api.post(`/api/application/status/${id}/update`, {
+        status,
+      });
       if (res.data.success) {
         toast.success(res.data.message);
       }
