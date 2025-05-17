@@ -20,14 +20,14 @@ app.use(cookieParser());
 const mode = process.env.MODE;
 
 // CORS configuration
-if (mode === "development") {
+if (mode === "dev") {
   app.use(
     cors({
       origin: process.env.CLIENT_URL,
       credentials: true,
     })
   );
-} else if (mode === "production") {
+} else if (mode === "prod") {
   app.use(
     cors({
       origin: "https://hi-jobify.vercel.app",
