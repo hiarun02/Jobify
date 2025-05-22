@@ -13,13 +13,10 @@ const Header = () => {
   const UserNavLinks = [
     {name: "Home", path: "/"},
     {name: "Jobs", path: "/jobs"},
+    {name: "Saved", path: "/saved"},
   ];
-  98;
 
-  const adminNavLinks = [
-    {name: "Companies", path: "/recruiter/companies"},
-    {name: "Jobs", path: "/recruiter/jobs"},
-  ];
+  const recruiterNavLinks = [{name: "Dashboard", path: "/recruiter/dashboard"}];
 
   const [open, setOpen] = useState(false);
 
@@ -65,7 +62,7 @@ const Header = () => {
                 <nav>
                   <ul className="flex items-center gap-6 text-md ">
                     {user && user.role === "recruiter"
-                      ? adminNavLinks.map((link) => {
+                      ? recruiterNavLinks.map((link) => {
                           return (
                             <Link
                               key={link.name}
@@ -170,7 +167,7 @@ const Header = () => {
                   {open && (
                     <div className="xl:hidden absolute bg-gray-100 w-[50vw] top-[65px] z-0 flex flex-col right-0 text-black text-center py-5 pb-5 gap-10 font-bold max-h-[90vh] ">
                       {user && user.role === "recruiter"
-                        ? adminNavLinks.map((link) => {
+                        ? recruiterNavLinks.map((link) => {
                             return (
                               <Link
                                 key={link.name}

@@ -22,7 +22,11 @@ const JobCard = ({job}) => {
             ? "Today"
             : ` ${timeCalFun(job?.createdAt)}, days ago`}
         </Badge>
-        <Button variant="outline" className="rounded-full">
+        <Button
+          onClick={() => navigate(`/saved/${job?._id}`)}
+          variant="outline"
+          className="rounded-full"
+        >
           <Bookmark />
         </Button>
       </div>

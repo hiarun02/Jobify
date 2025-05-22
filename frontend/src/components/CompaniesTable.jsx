@@ -36,10 +36,12 @@ const CompaniesTable = () => {
 
   return (
     <>
-      <div className="py-2">
-        <Label className="text-2xl font-bold">Registered Companies </Label>
+      <div className="">
+        <Label className="text-xl font-bold font-mono ">
+          Your Registered Company
+        </Label>
       </div>
-      <div className="border rounded-2xl overflow-hidden p-1 bg-gray-50">
+      <div className="border rounded-2xl overflow-hidden mt-5 bg-gray-50">
         <Table>
           <TableHeader>
             <TableRow>
