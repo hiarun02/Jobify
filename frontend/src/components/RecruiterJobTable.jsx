@@ -33,8 +33,8 @@ const RecruiterJobTable = () => {
 
   return (
     <>
-      <div className="py-5 ">
-        <Label className="text-2xl font-bold"> Created Jobs List ! </Label>
+      <div className="py-2">
+        <Label className="text-xl font-bold font-mono">Created Jobs!</Label>
       </div>
       <div className="border rounded-2xl overflow-hidden p-1 bg-gray-50">
         <Table>

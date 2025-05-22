@@ -74,7 +74,10 @@ const JobPost = () => {
     <>
       <div className="max-w-3xl m-auto gap-2 px-5 py-5">
         <div className="">
-          <Button variant="outline" onClick={() => navigate("/recruiter/jobs")}>
+          <Button
+            variant="outline"
+            onClick={() => navigate("/recruiter/dashboard")}
+          >
             Back
           </Button>
         </div>

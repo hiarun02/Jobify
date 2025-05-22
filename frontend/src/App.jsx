@@ -11,10 +11,10 @@ import JobDeatils from "./components/JobDeatils";
 import Profile from "./components/pages/Profile";
 import CompanyCreate from "./components/pages/CompanyCreate";
 import CompanySetup from "./components/pages/CompanySetup";
-import Companies from "./components/pages/Companies";
-import RecruiterJobs from "./components/pages/RecruiterJobs";
 import JobPost from "./components/pages/JobPost";
 import Applicants from "./components/pages/Applicants";
+import SaveJob from "./components/pages/SaveJob";
+import Dashboard from "./components/pages/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -30,10 +30,14 @@ const router = createBrowserRouter([
         element: <Jobs />,
       },
       {
+        path: "/saved/:id",
+        element: <SaveJob />,
+      },
+      {
         path: "/deatils/:id",
         element: <JobDeatils />,
       },
- 
+
       {
         path: "/contact",
         element: <Contact />,
@@ -52,24 +56,20 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/recruiter/companies",
-        element: <Companies />,
+        path: "/recruiter/dashboard",
+        element: <Dashboard />,
       },
       {
         path: "/recruiter/company/create",
         element: <CompanyCreate />,
       },
       {
-        path: "//recruiter/jobs/create",
+        path: "//recruiter/job/create",
         element: <JobPost />,
       },
       {
         path: "/recruiter/company/:id",
         element: <CompanySetup />,
-      },
-      {
-        path: "/recruiter/jobs",
-        element: <RecruiterJobs />,
       },
       {
         path: "/recruiter/jobs/:id/applicants",
