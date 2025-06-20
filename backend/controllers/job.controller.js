@@ -1,4 +1,5 @@
 import {Job} from "../models/job.model.js";
+import {User} from "../models/user.model.js";
 
 export const postJob = async (req, res) => {
   try {
@@ -102,6 +103,60 @@ export const getJobById = async (req, res) => {
     });
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+// Save job for user
+export const saveJob = async (req, res) => {
+  try {
+    const userId = req.id; // set by isAuthenticated middleware
+    const jobId = req.params.id; // get jobId from URL params
+
+    // Find the job
+    const job = await Job.findById(jobId);
+    if (!job) {
+      return res.status(404).json({message: "Job not found", success: false});
+    }
+
+    // Find the user
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({message: "User not found", success: false});
+    }
+
+    // Prevent duplicate saves
+    if (user.savedJobs.some((savedId) => savedId.toString() === jobId)) {
+      return res
+        .status(400)
+        .json({message: "Job already saved", success: false});
+    }
+
+    // Save the job
+    user.savedJobs.push(jobId);
+    await user.save();
+
+    return res
+      .status(200)
+      .json({message: "Job saved", success: true, savedJobs: user.savedJobs});
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: "Server error", success: false});
+  }
+};
+
+// get saved jobs
+
+export const getSavedJobs = async (req, res) => {
+  try {
+    const userId = req.id;
+    const user = await User.findById(userId).populate("savedJobs");
+    if (!user) {
+      return res.status(404).json({message: "User not found", success: false});
+    }
+    return res.status(200).json({savedJobs: user.savedJobs, success: true});
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: "Server error", success: false});
   }
 };
 
