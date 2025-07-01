@@ -109,8 +109,8 @@ export const getJobById = async (req, res) => {
 // Save job for user
 export const saveJob = async (req, res) => {
   try {
-    const userId = req.id; // set by isAuthenticated middleware
-    const jobId = req.params.id; // get jobId from URL params
+    const userId = req.id;
+    const {jobId} = req.body;
 
     // Find the job
     const job = await Job.findById(jobId);
@@ -125,7 +125,7 @@ export const saveJob = async (req, res) => {
     }
 
     // Prevent duplicate saves
-    if (user.savedJobs.some((savedId) => savedId.toString() === jobId)) {
+    if (user.savedJobs.includes(jobId)) {
       return res
         .status(400)
         .json({message: "Job already saved", success: false});

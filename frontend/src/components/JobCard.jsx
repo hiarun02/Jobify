@@ -3,6 +3,8 @@ import {Badge} from "./ui/badge";
 import {Button} from "./ui/button";
 import {Avatar, AvatarImage} from "./ui/avatar";
 import {useNavigate} from "react-router-dom";
+import {api} from "@/api/api";
+import {toast} from "sonner";
 
 const JobCard = ({job}) => {
   const navigate = useNavigate();
@@ -14,6 +16,22 @@ const JobCard = ({job}) => {
     return Math.floor(timecalculate / (1000 * 24 * 60 * 60));
   };
 
+  const handleSaveJob = async (jobId) => {
+    // console.log(jobId);
+    try {
+      const res = await api.post(
+        `/api/job/saved`,
+        {jobId},
+        {withCredentials: true}
+      );
+
+      if (res.data.message) toast.success(res.data.message);
+    } catch (error) {
+      console.log("error while saving job", error);
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
     <div className=" bg-white border-2 border-gray-100 rounded-2xl shadow-1xl  cursor-pointer p-3">
       <div className="flex justify-between items-center">
@@ -23,9 +41,9 @@ const JobCard = ({job}) => {
             : ` ${timeCalFun(job?.createdAt)}, days ago`}
         </Badge>
         <Button
-          onClick={() => navigate(`/saved/${job?._id}`)}
+          onClick={() => handleSaveJob(job._id)}
           variant="outline"
-          className="rounded-full"
+          className={` `}
         >
           <Bookmark />
         </Button>

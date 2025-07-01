@@ -1,16 +1,36 @@
-import {useSelector} from "react-redux";
+import {api} from "@/api/api";
+import {setSavedJobs} from "@/redux/jobSlice";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 
 const SaveJob = () => {
-  const {singalJob} = useSelector((store) => store.jobs);
+  const dispatch = useDispatch();
+  const {savedJobs} = useSelector((store) => store.jobs);
+
+  console.log(savedJobs);
+
+  useEffect(() => {
+    const fetchSavedJobs = async () => {
+      try {
+        const res = await api.get(`/api/job/get-saved-jobs`, {
+          withCredentials: true,
+        });
+        console.log(res);
+        dispatch(setSavedJobs(res.data.savedJobs));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchSavedJobs();
+  }, []);
+
   return (
     <div>
-      {singalJob.length === 0 ? (
-        <p>No saved jobs.</p>
-      ) : (
-        <div>
-          <h1 className="text-lg font-bold">{singalJob?.title} </h1>;
-        </div>
-      )}
+      <div>
+        {savedJobs.map((job) => {
+          return <div>{job.title}</div>;
+        })}
+      </div>
     </div>
   );
 };
