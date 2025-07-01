@@ -160,6 +160,32 @@ export const getSavedJobs = async (req, res) => {
   }
 };
 
+export const deleteSavedJob = async (req, res) => {
+  try {
+    const {jobId} = req.body;
+
+    const userId = req.id;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({message: "User not found", success: false});
+    }
+
+    user.savedJobs.pull(jobId); //
+
+    await user.save();
+
+    return res.status(200).json({
+      message: "Job removed from saved jobs",
+      savedJobs: user.savedJobs,
+      success: true,
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: "Server error", success: false});
+  }
+};
+
 export const getAdminJobs = async (req, res) => {
   try {
     const adminId = req.id;
