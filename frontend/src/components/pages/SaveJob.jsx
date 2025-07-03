@@ -14,11 +14,11 @@ const SaveJob = () => {
   const {savedJobs} = useSelector((store) => store.jobs);
 
   useEffect(() => {
-    const fetchSavedJobs = async (jobId) => {
+    const fetchSavedJobs = async () => {
       try {
         const res = await api.get(
           `/api/job/get-saved-jobs`,
-          {jobId},
+
           {
             withCredentials: true,
           }
@@ -29,7 +29,7 @@ const SaveJob = () => {
       }
     };
     fetchSavedJobs();
-  }, []);
+  }, [dispatch]);
 
   const handleDeleteSavedJob = async (jobId) => {
     try {
