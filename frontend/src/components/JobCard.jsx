@@ -1,13 +1,18 @@
-import {Bookmark} from "lucide-react";
+import {Bookmark, BookmarkCheck} from "lucide-react";
 import {Badge} from "./ui/badge";
 import {Button} from "./ui/button";
 import {Avatar, AvatarImage} from "./ui/avatar";
 import {useNavigate} from "react-router-dom";
 import {api} from "@/api/api";
 import {toast} from "sonner";
+import {useDispatch, useSelector} from "react-redux";
+import {setSavedJobs} from "@/redux/jobSlice";
 
 const JobCard = ({job}) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const {savedJobs} = useSelector((store) => store.jobs);
 
   const timeCalFun = (mongodbTime) => {
     const createdAt = new Date(mongodbTime);
@@ -15,6 +20,11 @@ const JobCard = ({job}) => {
     const timecalculate = currentTime - createdAt;
     return Math.floor(timecalculate / (1000 * 24 * 60 * 60));
   };
+
+  const isSaved = savedJobs?.some(
+    (savedJob) =>
+      (typeof savedJob === "string" ? savedJob : savedJob?._id) === job._id
+  );
 
   const handleSaveJob = async (jobId) => {
     // console.log(jobId);
@@ -26,6 +36,7 @@ const JobCard = ({job}) => {
       );
 
       if (res.data.message) toast.success(res.data.message);
+      if (res.data.savedJobs) dispatch(setSavedJobs(res.data.savedJobs));
     } catch (error) {
       console.log("error while saving job", error);
       toast.error(error.response.data.message);
@@ -40,12 +51,8 @@ const JobCard = ({job}) => {
             ? "Today"
             : ` ${timeCalFun(job?.createdAt)}, days ago`}
         </Badge>
-        <Button
-          onClick={() => handleSaveJob(job._id)}
-          variant="outline"
-          className={` `}
-        >
-          <Bookmark />
+        <Button onClick={() => handleSaveJob(job._id)} variant="outline">
+          {isSaved ? <BookmarkCheck /> : <Bookmark />}
         </Button>
       </div>
 
