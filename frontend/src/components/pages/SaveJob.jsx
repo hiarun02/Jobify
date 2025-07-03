@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Button} from "../ui/button";
 import {Avatar, AvatarImage} from "@radix-ui/react-avatar";
 import {useNavigate} from "react-router-dom";
+import {toast} from "sonner";
 
 const SaveJob = () => {
   const navigate = useNavigate();
@@ -13,11 +14,15 @@ const SaveJob = () => {
   const {savedJobs} = useSelector((store) => store.jobs);
 
   useEffect(() => {
-    const fetchSavedJobs = async () => {
+    const fetchSavedJobs = async (jobId) => {
       try {
-        const res = await api.get(`/api/job/get-saved-jobs`, {
-          withCredentials: true,
-        });
+        const res = await api.get(
+          `/api/job/get-saved-jobs`,
+          {jobId},
+          {
+            withCredentials: true,
+          }
+        );
         dispatch(setSavedJobs(res.data.savedJobs));
       } catch (error) {
         console.log(error);
@@ -25,6 +30,21 @@ const SaveJob = () => {
     };
     fetchSavedJobs();
   }, []);
+
+  const handleDeleteSavedJob = async (jobId) => {
+    try {
+      const res = await api.post(
+        `/api/job/delete-saved-job`,
+        {jobId},
+        {withCredentials: true}
+      );
+      dispatch(setSavedJobs(res.data.savedJobs));
+      toast.success("Job removed from saved jobs");
+    } catch (error) {
+      console.log("error while deleting saved job", error);
+      toast.error(error?.response?.data?.message || "Error");
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-5 py-5">
@@ -38,7 +58,10 @@ const SaveJob = () => {
             return (
               <div className=" bg-white border-2 border-gray-100 rounded-2xl shadow-1xl  cursor-pointer p-3">
                 <div className="">
-                  <Button variant="outline">
+                  <Button
+                    variant="outline"
+                    onClick={() => handleDeleteSavedJob(job._id)}
+                  >
                     <Trash2 />
                   </Button>
                 </div>
