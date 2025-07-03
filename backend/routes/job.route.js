@@ -18,6 +18,6 @@ router.route("/adminjob").get(isAuthenticated, getAdminJobs);
 router.route("/get/:id").get(getJobById);
 router.route("/saved").post(isAuthenticated, saveJob);
 router.route("/get-saved-jobs").get(isAuthenticated, getSavedJobs);
-router.route("/delete-saved-job").get(isAuthenticated, deleteSavedJob);
+router.route("/delete-saved-job").post(isAuthenticated, deleteSavedJob);
 
 export default router;

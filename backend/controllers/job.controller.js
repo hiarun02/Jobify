@@ -166,7 +166,6 @@ export const getSavedJobs = async (req, res) => {
 export const deleteSavedJob = async (req, res) => {
   try {
     const {jobId} = req.body;
-
     const userId = req.id;
 
     const user = await User.findById(userId);
@@ -174,13 +173,18 @@ export const deleteSavedJob = async (req, res) => {
       return res.status(404).json({message: "User not found", success: false});
     }
 
-    user.savedJobs.pull(jobId); //
-
+    user.savedJobs.pull(jobId);
     await user.save();
+
+    // Populate savedJobs with job and company info
+    const populatedUser = await User.findById(userId).populate({
+      path: "savedJobs",
+      populate: {path: "company"},
+    });
 
     return res.status(200).json({
       message: "Job removed from saved jobs",
-      savedJobs: user.savedJobs,
+      savedJobs: populatedUser.savedJobs,
       success: true,
     });
   } catch (error) {
