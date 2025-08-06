@@ -17,6 +17,8 @@ const Register = () => {
     profile: "",
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   // Handle input change
 
   const handleChange = (e) => {
@@ -44,6 +46,7 @@ const Register = () => {
     if (input.profile) formData.append("file", input.profile);
 
     try {
+      setIsLoading(true);
       const res = await api.post(`/api/user/register`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -57,6 +60,8 @@ const Register = () => {
     } catch (error) {
       console.log(error.message);
       toast.error(error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -159,7 +164,7 @@ const Register = () => {
                 type="submit"
                 className="w-full bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
               >
-                Create Account
+                {isLoading ? "Please Wait..." : "Register"}
               </button>
             </div>
             <span className="text-gray-700 text-sm font-mono">
