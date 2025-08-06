@@ -17,6 +17,8 @@ const Login = () => {
     role: "",
   });
 
+  const [isLoading, setisLoading] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -27,13 +29,16 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
+      setisLoading(true);
       const res = await api.post(`/api/user/login`, input, {
         headers: {
           "Content-Type": "application/json",
         },
         withCredentials: true,
       });
+
       if (res.data.success) {
         // Dispatch user data to Redux store
         dispatch(setUser(res.data.user));
@@ -43,6 +48,8 @@ const Login = () => {
     } catch (error) {
       console.log(error.message);
       toast.error(error.response.data.message);
+    } finally {
+      setisLoading(false);
     }
   };
 
@@ -115,7 +122,7 @@ const Login = () => {
                 type="submit"
                 className="w-full bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
               >
-                Login
+                {isLoading ? "Please Wait..." : "Login"}
               </button>
             </div>
             <span className="text-gray-700 text-sm font-mono">
