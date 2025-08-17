@@ -62,7 +62,7 @@ const JobPost = () => {
 
       if (res.data.success) {
         toast.success(res.data.message);
-        navigate("/recruiter/jobs");
+        navigate("/recruiter/dashboard");
       }
     } catch (error) {
       console.log(error);

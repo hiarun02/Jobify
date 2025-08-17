@@ -29,7 +29,7 @@ const Dashboard = () => {
   return (
     <>
       {/* company section */}
-      <div className="max-w-5xl m-auto my-5 border rounded-2xl px-5 flex flex-col py-5">
+      <div className="max-w-6xl m-auto my-5 border rounded-2xl px-5 flex flex-col py-5">
         <div className="flex justify-between gap-5 flex-col">
           {companies.length === 0 ? (
             <Button
@@ -52,7 +52,7 @@ const Dashboard = () => {
 
       {/* Job section */}
 
-      <div className="max-w-5xl m-auto my-10 border rounded-2xl gap-5 px-5 flex flex-col py-5">
+      <div className="max-w-6xl m-auto my-10 border rounded-2xl gap-5 px-5 flex flex-col py-5">
         <div className="flex justify-between gap-5">
           <Input
             onChange={(e) => setInput(e.target.value)}
