@@ -39,12 +39,12 @@ const Jobs = () => {
       {/* Main Container */}
       <div className="flex flex-col lg:flex-row gap-5">
         {/* Job Filter Section */}
-        <div className="w-full lg:w-1/4 bg-white p-5 border rounded-2xl h-fit">
+        <div className="w-full lg:w-1/4 bg-white p-5 border rounded-2xl h-fit lg:sticky lg:top-20">
           <JobFillter />
         </div>
 
         {/* Job Cards Section */}
-        <div className="w-full lg:w-3/4">
+        <div className="w-full lg:w-3/4 lg:ml-0">
           {filterJob.length <= 0 ? (
             <div className="flex justify-center items-center h-full">
               <span className="text-2xl font-mono">Job Not Found!</span>
