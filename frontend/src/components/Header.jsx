@@ -51,7 +51,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-white border-b border-gray-200 backdrop-blur-sm">
+      <header className="bg-white border-b border-gray-200">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-2">
@@ -234,7 +234,7 @@ const Header = () => {
                               );
                             })}
                         {!user && (
-                          <div className="border-t border-gray-200 mt-2 pt-2 px-4 pb-2 space-y-2">
+                          <div className="border-t border-gray-200 mt-2 pt-3 pb-2 px-3 flex justify-center flex-col gap-3 ">
                             <Link to="/register" onClick={() => setOpen(false)}>
                               <Button
                                 variant="outline"
