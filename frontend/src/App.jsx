@@ -15,11 +15,13 @@ import JobPost from "./components/pages/JobPost";
 import Applicants from "./components/pages/Applicants";
 import SaveJob from "./components/pages/SaveJob";
 import Dashboard from "./components/pages/Dashboard";
+import NotFoundPage from "./components/pages/NotFoundPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
+    errorElement: <NotFoundPage />,
     children: [
       {
         path: "/",
