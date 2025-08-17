@@ -66,7 +66,7 @@ const Header = () => {
             <div className="flex items-center gap-6">
               <div className="hidden md:block">
                 <nav>
-                  <ul className="flex items-center gap-8">
+                  <ul className="flex items-center gap-5">
                     {user && user.role === "recruiter"
                       ? recruiterNavLinks.map((link) => {
                           return (
