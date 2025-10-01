@@ -2,10 +2,8 @@
 
 A full-stack job portal application built with the MERN stack, featuring separate interfaces for job seekers (students) and recruiters. Users can search and apply for jobs, while recruiters can post jobs and manage applications.
 
-![Jobify](https://img.shields.io/badge/Version-1.0.0-blue.svg)
-![React](https://img.shields.io/badge/React-19.0.0-61dafb.svg)
-![Node.js](https://img.shields.io/badge/Node.js-Express-green.svg)
-![MongoDB](https://img.shields.io/badge/Database-MongoDB-green.svg)
+<img width="1898" height="864" alt="Screenshot 2025-10-01 235400" src="https://github.com/user-attachments/assets/28be04d6-5867-48cf-974f-fe4df9b34f22" />
+
 
 ## ✨ Features
 
