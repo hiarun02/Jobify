@@ -43,15 +43,12 @@ let PORT = process.env.PORT || 3000;
 app.use("/api/user", userRoute);
 
 // company apis
-
 app.use("/api/company", companyRoute);
 
 // job api
-
 app.use("/api/job", jobRoute);
 
 // application api
-
 app.use("/api/application", applicationRoute);
 
 app.listen(PORT, () => {

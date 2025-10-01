@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {LogOut, Menu, User, X, Briefcase} from "lucide-react";
 import {Link, useNavigate, useLocation} from "react-router-dom";
-import {Popover, PopoverTrigger, PopoverContent} from "@radix-ui/react-popover";
+import {Popover, PopoverContent, PopoverTrigger} from "./ui/popover";
 import {Avatar, AvatarImage} from "./ui/avatar";
 import {Button} from "./ui/button";
 import {useDispatch, useSelector} from "react-redux";

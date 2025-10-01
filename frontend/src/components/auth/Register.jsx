@@ -4,7 +4,7 @@ import {Label} from "../ui/label";
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {toast} from "sonner";
-import {api} from "@/api/api";
+import {RegisterHandler} from "@/api/api";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -45,14 +45,9 @@ const Register = () => {
 
     if (input.profile) formData.append("file", input.profile);
 
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      const res = await api.post(`/api/user/register`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        withCredentials: true,
-      });
+      const res = await RegisterHandler(formData);
       if (res.data.success) {
         navigate("/login");
         toast.success(res.data.message);

@@ -7,7 +7,7 @@ import {toast} from "sonner";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setUser} from "@/redux/authSlice";
-import {api} from "@/api/api";
+import {LoginHandler} from "@/api/api";
 
 const Login = () => {
   // Initial state for input fields
@@ -29,16 +29,9 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setisLoading(true);
     try {
-      setisLoading(true);
-      const res = await api.post(`/api/user/login`, input, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
-
+      const res = await LoginHandler(input);
       if (res.data.success) {
         // Dispatch user data to Redux store
         dispatch(setUser(res.data.user));
