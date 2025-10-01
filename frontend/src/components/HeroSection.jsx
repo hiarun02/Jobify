@@ -1,19 +1,12 @@
 import React from "react";
 import {Button} from "./ui/button";
 import {Link} from "react-router-dom";
-import {TrendingUp, Users, Briefcase, ArrowRight, Star} from "lucide-react";
+import {ArrowRight, Star} from "lucide-react";
 
 const HeroSection = () => {
   return (
     <>
-      <section className="relative bg-gradient-to-br from-red-50 via-white to-red-50 overflow-hidden pt-5">
-        {/* Background decorations */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-32 w-80 h-80 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-          <div className="absolute -bottom-40 -left-32 w-80 h-80 bg-red-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-          <div className="absolute top-40 left-40 w-80 h-80 bg-red-50 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-        </div>
-
+      <section className="relative bg-gradient-to-br  overflow-hidden pt-5">
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
           <div className="text-center">
             {/* Main heading */}

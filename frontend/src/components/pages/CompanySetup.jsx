@@ -16,12 +16,14 @@ const CompanySetup = () => {
   const navigate = useNavigate();
 
   const [input, setInput] = useState({
-    companyName: "",
+    name: "",
     description: "",
     website: "",
     location: "",
     file: null,
   });
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const {singalCompany} = useSelector((store) => store.company);
 
@@ -36,8 +38,9 @@ const CompanySetup = () => {
 
   const formHandler = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData();
-    formData.append("companyName", input.companyName);
+    formData.append("name", input.name);
     formData.append("description", input.description);
     formData.append("website", input.website);
     formData.append("location", input.location);
@@ -60,11 +63,13 @@ const CompanySetup = () => {
     } catch (error) {
       console.log(error.message);
       toast.error(error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
   useEffect(() => {
     setInput({
-      companyName: singalCompany?.name || "",
+      name: singalCompany?.name || "",
       description: singalCompany?.description || "",
       website: singalCompany?.website || "",
       location: singalCompany?.location || "",
@@ -91,9 +96,9 @@ const CompanySetup = () => {
                 <Label className="pb-3">Company Name</Label>
                 <Input
                   type="text"
-                  value={input.companyName}
+                  value={input.name}
                   onChange={changeEventHandler}
-                  name="companyName"
+                  name="name"
                   placeholder="Enter Your Company Name"
                 />
               </div>
@@ -143,7 +148,7 @@ const CompanySetup = () => {
                 type="submit"
                 className="w-full bg-red-600 hover:bg-red-700"
               >
-                Save
+                {isLoading ? "Updating..." : "Update"}
               </Button>
             </div>
           </form>

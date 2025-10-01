@@ -48,6 +48,7 @@ const ApplicantsTable = () => {
               <TableHead>Contact</TableHead>
               <TableHead>Resume</TableHead>
               <TableHead>Date</TableHead>
+              <TableHead>Status</TableHead>
               <TableHead>Action</TableHead>
             </TableRow>
           </TableHeader>
@@ -74,6 +75,7 @@ const ApplicantsTable = () => {
                     <TableCell>
                       {application?.applicant?.createdAt.split("T")[0]}
                     </TableCell>
+                    <TableCell>{application?.status}</TableCell>
                     <TableCell>
                       <Popover>
                         <PopoverTrigger>
