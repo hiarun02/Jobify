@@ -259,21 +259,11 @@ The application uses a consistent design system built with:
 
 This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
 
-## 👥 Authors
-
-- **Your Name** - _Initial work_ - [YourGitHub](https://github.com/yourusername)
-
 ## 🙏 Acknowledgments
 
 - React team for the amazing framework
 - MongoDB for the flexible database
 - Cloudinary for image management
 - All the open-source contributors
-
-## 📞 Support
-
-For support, email your-email@example.com or create an issue in the repository.
-
----
 
 **Happy Job Hunting! 🎯**
