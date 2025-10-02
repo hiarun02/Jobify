@@ -12,6 +12,8 @@ import {MoreHorizontal} from "lucide-react";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {api} from "@/api/api";
+import {toast} from "sonner";
 
 const RecruiterJobTable = () => {
   const navigate = useNavigate();
@@ -30,6 +32,24 @@ const RecruiterJobTable = () => {
       });
     setFilterJobs(filteredJobs);
   }, [jobSearchInput, adminAllJobs]);
+
+  // handle delete
+
+  const handleDelete = async (id) => {
+    try {
+      const res = await api.delete(`/api/job/delete/${id}`, {
+        withCredentials: true,
+      });
+      if (res.data.success) {
+        const remainingJobs = filterJob.filter((job) => job._id !== id);
+        setFilterJobs(remainingJobs);
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    }
+  };
 
   return (
     <>
@@ -63,10 +83,28 @@ const RecruiterJobTable = () => {
                           <span
                             className="hover:underline"
                             onClick={() =>
-                              navigate(`/recruiter/jobs/${job?._id}/applicants`)
+                              navigate(`/recruiter/job/${job?._id}/applicants`)
                             }
                           >
                             Applicants
+                          </span>
+                        </button>
+                        <button>
+                          <span
+                            className="hover:underline"
+                            onClick={() =>
+                              navigate(`/recruiter/job/${job?._id}`)
+                            }
+                          >
+                            Update
+                          </span>
+                        </button>
+                        <button>
+                          <span
+                            className="hover:underline"
+                            onClick={() => handleDelete(job?._id)}
+                          >
+                            Delete
                           </span>
                         </button>
                       </div>

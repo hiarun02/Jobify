@@ -20,7 +20,7 @@ const useGetAllJobs = () => {
       }
     };
     getAllJobs();
-  }, []);
+  }, [dispatch]);
 };
 
 export default useGetAllJobs;

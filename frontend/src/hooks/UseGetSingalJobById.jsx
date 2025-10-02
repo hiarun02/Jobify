@@ -1,26 +1,26 @@
 import {api} from "@/api/api";
-import {setAppliedJobs} from "@/redux/jobSlice";
+import {setSingalJob} from "@/redux/jobSlice";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 
-const useGetAppliedJobs = () => {
+const useGetSingalJobById = (jobId) => {
   const dispatch = useDispatch();
+
   useEffect(() => {
-    const fetchAppliedJobs = async () => {
+    const fetchSingalJob = async () => {
       try {
-        const res = await api.get(`/api/application/get`, {
+        const res = await api.get(`/api/job/get/${jobId}`, {
           withCredentials: true,
         });
-
         if (res.data.success) {
-          dispatch(setAppliedJobs(res.data.applications));
+          dispatch(setSingalJob(res.data.job));
         }
       } catch (error) {
         console.log(error);
       }
     };
-    fetchAppliedJobs();
-  }, [dispatch]);
+    fetchSingalJob();
+  }, [jobId, dispatch]);
 };
 
-export default useGetAppliedJobs;
+export default useGetSingalJobById;

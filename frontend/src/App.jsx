@@ -16,6 +16,7 @@ import Applicants from "./components/pages/Applicants";
 import SaveJob from "./components/pages/SaveJob";
 import Dashboard from "./components/pages/Dashboard";
 import NotFoundPage from "./components/pages/NotFoundPage";
+import UpdateJobPage from "./components/pages/UpdateJobPage";
 
 const router = createBrowserRouter([
   {
@@ -74,8 +75,12 @@ const router = createBrowserRouter([
         element: <CompanySetup />,
       },
       {
-        path: "/recruiter/jobs/:id/applicants",
+        path: "/recruiter/job/:id/applicants",
         element: <Applicants />,
+      },
+      {
+        path: "/recruiter/job/:id",
+        element: <UpdateJobPage />,
       },
     ],
   },

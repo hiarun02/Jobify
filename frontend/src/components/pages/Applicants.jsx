@@ -26,7 +26,7 @@ const Applicants = () => {
       }
     };
     fetchedApplicants();
-  }, []);
+  }, [dispatch, params.id]);
   return (
     <>
       <div className="max-w-7xl m-auto my-22 border rounded-2xl gap-5 px-5 flex flex-col py-5">
