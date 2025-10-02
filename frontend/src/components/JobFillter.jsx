@@ -30,17 +30,17 @@ const JobFillter = () => {
   // search
   useEffect(() => {
     dispatch(setSearchQuery(searchValue));
-  }, [searchValue]);
+  }, [searchValue, dispatch]);
 
   // filter
 
   const selectHandler = (value) => {
-    dispatch(setSelectValue(value));
+    setSelectValue(value);
   };
 
   useEffect(() => {
     dispatch(setFilterQuery(selectValue));
-  }, [selectValue]);
+  }, [selectValue, dispatch]);
 
   return (
     <div className="flex flex-col w-full h-fit bg-white rounded-lg">

@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(setJobSearchInput(input));
-  }, [input]);
+  }, [input, dispatch]);
 
   return (
     <>

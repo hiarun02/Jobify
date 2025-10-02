@@ -37,7 +37,7 @@ const JobDeatils = () => {
       }
     };
     getSingalJob();
-  }, [jobId]);
+  }, [jobId, dispatch, user?._id]);
 
   // this wroks when user click
   const jObApplyHandler = async () => {

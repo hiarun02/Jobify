@@ -218,3 +218,66 @@ export const getAdminJobs = async (req, res) => {
     console.log(error.message);
   }
 };
+
+// update job
+
+export const updateJob = async (req, res) => {
+  try {
+    const {
+      title,
+      description,
+      requirements,
+      salary,
+      location,
+      jobType,
+      experience,
+      position,
+    } = req.body;
+
+    const job = await Job.findByIdAndUpdate(req.params.id, {
+      title,
+      description,
+      requirements,
+      salary,
+      location,
+      jobType,
+      experience,
+      position,
+    });
+
+    if (!job) {
+      return res.status(404).json({
+        message: "Job not found",
+        success: false,
+      });
+    }
+
+    return res.status(200).json({
+      message: "Job updated successfully",
+      success: true,
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: "Server error", success: false});
+  }
+};
+
+// delete job
+
+export const deleteJob = async (req, res) => {
+  try {
+    const jobId = req.params.id;
+
+    const job = await Job.findByIdAndDelete(jobId);
+    if (!job) {
+      return res.status(404).json({message: "Job not found", success: false});
+    }
+    return res
+      .status(200)
+      .json({message: "Job deleted successfully", success: true});
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: "Server error", success: false});
+  }
+};
+

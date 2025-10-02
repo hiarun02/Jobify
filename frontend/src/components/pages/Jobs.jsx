@@ -4,7 +4,7 @@ import JobFillter from "../JobFillter";
 import {useEffect, useState} from "react";
 
 const Jobs = () => {
-  const {allJobs, filterQuery, searchQuery} = useSelector(
+  const {allJobs, filterQuery, searchQuery, } = useSelector(
     (store) => store.jobs
   );
 

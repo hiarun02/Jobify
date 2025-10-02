@@ -1,25 +1,21 @@
 import {Label} from "@radix-ui/react-label";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Input} from "../ui/input";
 import {Button} from "../ui/button";
-import {useNavigate} from "react-router-dom";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import {useNavigate, useParams} from "react-router-dom";
+
 import {useSelector} from "react-redux";
-import {SelectGroup} from "@radix-ui/react-select";
+
 import {toast} from "sonner";
 import {api} from "@/api/api";
+import useGetSingalJobById from "@/hooks/UseGetSingalJobById";
 
-const JobPost = () => {
-  const {companies} = useSelector((store) => store.company);
+const UpdateJobPage = () => {
+  const params = useParams();
+  useGetSingalJobById(params.id);
+  const {singalJob} = useSelector((store) => store.jobs);
 
   const navigate = useNavigate();
-
   const [isLoading, setIsLoading] = useState(false);
 
   const [input, setInput] = useState({
@@ -31,7 +27,6 @@ const JobPost = () => {
     jobType: "",
     experience: "",
     position: 0,
-    companyId: "",
   });
 
   // input handler
@@ -40,23 +35,13 @@ const JobPost = () => {
     setInput({...input, [e.target.name]: e.target.value});
   };
 
-  // selectChangeHandler
-
-  const selectChangeHanlder = (value) => {
-    const selectedCompany = companies.find(
-      (company) => company.name.toLowerCase() === value
-    );
-
-    setInput({...input, companyId: selectedCompany._id});
-  };
-
   // form handler
 
   const submitFromHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await api.post(`/api/job/post`, input, {
+      const res = await api.patch(`/api/job/update/${params.id}`, input, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -74,6 +59,19 @@ const JobPost = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    setInput({
+      title: singalJob?.title || "",
+      description: singalJob?.description || "",
+      requirements: singalJob?.requirements?.join(",") || "",
+      salary: singalJob?.salary || "",
+      location: singalJob?.location || "",
+      jobType: singalJob?.jobType || "",
+      experience: singalJob?.experience || "",
+      position: singalJob?.position || 0,
+    });
+  }, [singalJob]);
 
   return (
     <>
@@ -172,7 +170,7 @@ const JobPost = () => {
               </div>
             </div>
             {/* grids inputs3*/}
-            <div className="grid xl:grid-cols-2 gap-5 mb-5">
+            <div className="grid xl:grid-cols-1 gap-5 mb-5">
               <div className="w-full">
                 <Label className="">No of Position</Label>
                 <Input
@@ -184,40 +182,10 @@ const JobPost = () => {
                   placeholder="Enter Job Title"
                 />
               </div>
-              <div className="w-full">
-                <Label className="">Select Company</Label>
-                <div>
-                  {companies.length > 0 && (
-                    <Select onValueChange={selectChangeHanlder}>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select Company" />
-                      </SelectTrigger>
-                      <SelectContent className="text-center ">
-                        <SelectGroup>
-                          {companies.map((company) => {
-                            return (
-                              <div key={company._id}>
-                                <SelectItem value={company?.name.toLowerCase()}>
-                                  {company.name}
-                                </SelectItem>
-                              </div>
-                            );
-                          })}
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  )}
-                </div>
-              </div>
             </div>
             <Button className="bg-red-600 hover:bg-red-700">
-              {isLoading ? "Posting..." : "Post Job"}
+              {isLoading ? "Updating..." : "Update"}
             </Button>
-            {companies.length === 0 && (
-              <div className="mt-3 font-mono text-red-700 w-full flex justify-center ">
-                <p>*Please Register Company frist, before post Job</p>
-              </div>
-            )}
           </div>
         </form>
       </div>
@@ -225,4 +193,4 @@ const JobPost = () => {
   );
 };
 
-export default JobPost;
+export default UpdateJobPage;
