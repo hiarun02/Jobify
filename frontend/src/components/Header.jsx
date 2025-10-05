@@ -12,8 +12,8 @@ import {api} from "@/api/api";
 const Header = () => {
   const UserNavLinks = [
     {name: "Home", path: "/"},
-    {name: "Jobs", path: "/jobs"},
-    {name: "Saved", path: "/saved"},
+    {name: "Explore Jobs", path: "/jobs"},
+    {name: "Save", path: "/saved"},
   ];
 
   const recruiterNavLinks = [{name: "Dashboard", path: "/recruiter/dashboard"}];
