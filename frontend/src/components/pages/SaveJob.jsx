@@ -1,6 +1,6 @@
 import {api} from "@/api/api";
 import {setSavedJobs} from "@/redux/jobSlice";
-import {Badge, DeleteIcon, Trash2} from "lucide-react";
+import {Trash2} from "lucide-react";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "../ui/button";

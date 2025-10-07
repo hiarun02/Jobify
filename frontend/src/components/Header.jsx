@@ -13,7 +13,7 @@ const Header = () => {
   const UserNavLinks = [
     {name: "Home", path: "/"},
     {name: "Explore Jobs", path: "/jobs"},
-    {name: "Save", path: "/saved"},
+    {name: "Saved Jobs", path: "/saved"},
   ];
 
   const recruiterNavLinks = [{name: "Dashboard", path: "/recruiter/dashboard"}];
@@ -45,9 +45,16 @@ const Header = () => {
   };
 
   const {user} = useSelector((store) => store.auth);
+  const {savedJobs} = useSelector((store) => store.jobs);
+  console.log(user);
   const location = useLocation();
 
   const isActiveLink = (path) => location.pathname === path;
+
+  // Only show Saved Jobs when a user is logged in
+  const visibleUserLinks = user
+    ? UserNavLinks
+    : UserNavLinks.filter((l) => l.name !== "Saved Jobs");
 
   return (
     <>
@@ -80,6 +87,7 @@ const Header = () => {
                                 }`}
                               >
                                 {link.name}
+
                                 {isActiveLink(link.path) && (
                                   <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 rounded-full"></span>
                                 )}
@@ -87,7 +95,7 @@ const Header = () => {
                             </li>
                           );
                         })
-                      : UserNavLinks.map((link) => {
+                      : visibleUserLinks.map((link) => {
                           return (
                             <li key={link.name}>
                               <Link
@@ -98,7 +106,12 @@ const Header = () => {
                                     : "text-gray-600 hover:text-red-600"
                                 }`}
                               >
-                                {link.name}
+                                {user &&
+                                link.name === "Saved Jobs" &&
+                                link.path === "/saved"
+                                  ? `${link.name} (${savedJobs.length})`
+                                  : link.name}
+
                                 {isActiveLink(link.path) && (
                                   <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 rounded-full"></span>
                                 )}
@@ -217,7 +230,7 @@ const Header = () => {
                                 </Link>
                               );
                             })
-                          : UserNavLinks.map((link) => {
+                          : visibleUserLinks.map((link) => {
                               return (
                                 <Link
                                   key={link.name}
