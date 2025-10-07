@@ -13,7 +13,7 @@ const HeroSection = () => {
             <div className="mb-8">
               <div className="inline-flex items-center gap-2 bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
                 <Star className="h-4 w-4" />
-                #1 Job Platform in the Industry
+                #1 Job Platform
               </div>
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
                 Find Your{" "}
