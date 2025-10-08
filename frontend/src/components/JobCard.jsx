@@ -58,28 +58,35 @@ const JobCard = ({job}) => {
 
       <div className="">
         <div className="mt-5 flex items-center gap-5 ">
-          <Button variant="outline" size="icon" className="w-16 h-16 my-2">
+          <div
+            variant="outline"
+            size="icon"
+            className="w-16 h-16 flex items-center justify-center bg-white"
+          >
             <Avatar>
-              <AvatarImage src={job?.company?.logo}></AvatarImage>
+              <AvatarImage
+                className="w-full h-full object-cover"
+                src={job?.company?.logo}
+              ></AvatarImage>
             </Avatar>
-          </Button>
+          </div>
           <div>
             <h2 className="font-medium text-lg">{job?.company?.name}</h2>
             <p className="text-sm text-gray-500">{job?.location}</p>
           </div>
         </div>
         <div className="pt-2 pb-2">
-          <h1 className="text-lg font-bold">{job?.title}</h1>
-          <p className="text-sm">
+          <h1 className="text-1xl font-bold">{`${job?.title}`}</h1>
+          <p className="text-sm mt-1 text-gray-600">
             {job?.description?.length > 50 &&
-              `${job?.description.slice(0, 100)}...`}
+              `${job?.description.slice(0, 50)}...`}
           </p>
         </div>
-        <div className="my-2 mt-2 flex gap-3 text-red-700">
+        {/* <div className="my-2 mt-2 flex gap-3 text-red-700">
           <Badge variant="ghost">{job?.jobType}</Badge>
           <Badge variant="ghost">{job?.salary}</Badge>
           <Badge variant="ghost">{job?.position}</Badge>
-        </div>
+        </div> */}
         <div className="w-full my-2 pt-2">
           <Button
             onClick={() => navigate(`/deatils/${job?._id}`)}
