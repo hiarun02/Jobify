@@ -1,9 +1,5 @@
-import {json} from "express";
 import {Job} from "../models/job.model.js";
 import {User} from "../models/user.model.js";
-import NodeCache from "node-cache";
-
-const nodeCache = new NodeCache({stdTTL: 100, checkperiod: 120});
 
 export const postJob = async (req, res) => {
   try {
@@ -61,18 +57,11 @@ export const postJob = async (req, res) => {
 
 export const getAllJob = async (req, res) => {
   try {
-    let jobs;
-
-    if (nodeCache.has("allJobs")) {
-      jobs = JSON.parse(nodeCache.get("allJobs"));
-    } else {
-      jobs = await Job.find({})
-        .populate({
-          path: "company",
-        })
-        .sort({createdAt: -1});
-      nodeCache.set("allJobs", JSON.stringify(jobs));
-    }
+    let jobs = await Job.find({})
+      .populate({
+        path: "company",
+      })
+      .sort({createdAt: -1});
 
     if (!jobs) {
       return res.status(404).json({
@@ -256,7 +245,6 @@ export const updateJob = async (req, res) => {
       });
     }
 
-    nodeCache.del("allJobs");
     return res.status(200).json({
       message: "Job updated successfully",
       success: true,
