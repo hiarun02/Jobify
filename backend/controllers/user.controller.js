@@ -142,6 +142,8 @@ export const profileUpdate = async (req, res) => {
   try {
     const {fullName, email, phoneNumber, bio, skills} = req.body;
 
+    const cacheKey = `user:${req.id}:profile`;
+
     // cloudinary to upload file
     const file = req.file;
     const fileUri = getDataUri(file);
