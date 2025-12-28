@@ -1,40 +1,39 @@
-# 🚀 Jobify - Job Portal Platform
+# Jobify - Job Portal
 
-A full-stack job portal application built with the MERN stack, featuring separate interfaces for job seekers (students) and recruiters. Users can search and apply for jobs, while recruiters can post jobs and manage applications.
-
-
+A job portal app where students can find and apply for jobs, and recruiters can post jobs and manage applications.
 
 
-## ✨ Features
 
-### 👨‍🎓 For Students/Job Seekers
 
-- **User Authentication**: Secure registration and login
-- **Profile Management**: Upload profile photo, resume, and personal information
-- **Job Search**: Browse and search through available job listings
-- **Job Applications**: Apply to jobs with one click
-- **Save Jobs**: Bookmark interesting job opportunities
-- **Application Tracking**: View application status and history
-- **Responsive Design**: Optimized for all devices
+**For Students:**
 
-### 👨‍💼 For Recruiters
+- Sign up and create a profile with resume
+- Browse and search for jobs
+- Apply for jobs you like
+- Save jobs to apply later
+- Track your applications
 
-- **Company Management**: Create and manage company profiles
-- **Job Posting**: Post new job opportunities with detailed descriptions
-- **Application Management**: View and manage job applications
-- **Applicant Tracking**: Review applicant profiles and resumes
-- **Company Branding**: Upload company logos and information
-- **Dashboard**: Comprehensive overview of jobs and applications
+**For Recruiters:**
 
-### 🔐 Security & Authentication
+- Create a company profile
+- Post job openings
+- View applications from students
+- Check candidate profiles and resumes
+- Update application status
 
-- JWT-based authentication
-- Role-based access control (Student/Recruiter)
-- Secure cookie management
-- Password hashing with bcrypt
-- Protected routes and middleware
+## Tech Stack
 
-## 🛠️ Tech Stack
+**Frontend:**
+
+- React 19.0.0
+- Vite (build tool)
+- Redux (state management)
+- React Router (navigation)
+- Tailwind CSS (styling)
+- Radix UI (components)
+- Axios (API calls)
+
+**Backend:**
 
 ### Frontend
 
