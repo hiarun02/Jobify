@@ -3,6 +3,7 @@ import {Label} from "@radix-ui/react-label";
 import {RadioGroup, RadioGroupItem} from "./ui/radio-group";
 import {setFilterQuery, setSearchQuery} from "@/redux/jobSlice";
 import {useDispatch} from "react-redux";
+import {RotateCcw} from "lucide-react";
 
 const fillterList = [
   {
@@ -22,7 +23,6 @@ const fillterList = [
 
 const JobFillter = () => {
   const dispatch = useDispatch();
-  const [isOpen, setIsOpen] = useState(true);
 
   const [selectValue, setSelectValue] = useState("");
   const [searchValue, setSearchValue] = useState("");
@@ -36,6 +36,13 @@ const JobFillter = () => {
 
   const selectHandler = (value) => {
     setSelectValue(value);
+  };
+
+  const handleResetFilter = () => {
+    setSelectValue("");
+    setSearchValue("");
+    dispatch(setFilterQuery(""));
+    dispatch(setSearchQuery(""));
   };
 
   useEffect(() => {
@@ -54,27 +61,22 @@ const JobFillter = () => {
           className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
         />
       </div>
-      {/* Toggle Button for Small Devices */}
+
+      {/* Reset Filter Button */}
       <button
-        className="lg:hidden mb-5 bg-red-600 text-white px-4 py-2 rounded-lg"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleResetFilter}
+        className="mb-5 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-lg text-sm flex items-center justify-center gap-1 w-full"
       >
-        {isOpen ? "Hide Filters" : "Show Filters"}
+        <RotateCcw size={14} />
+        Reset
       </button>
+      
 
       {/* Filter Section */}
-      <div
-        className={`w-full overflow-y-auto scrollbar-hide ${
-          !isOpen ? "hidden" : ""
-        }`}
-      >
-        <h1 className="text-2xl text-center lg:text-left">
-          <span className="text-red-700 font-bold">#Filter</span> Jobs
-        </h1>
-        <hr className="mt-2" />
+      <div className="w-full overflow-y-auto scrollbar-hide">
         <RadioGroup value={selectValue} onValueChange={selectHandler}>
           {fillterList.map((data, index) => (
-            <div key={index} className="mt-4">
+            <div key={index} className="mt-2">
               <h1 className="font-semibold">
                 <hr className="mb-3" />
                 {data.fillterType}

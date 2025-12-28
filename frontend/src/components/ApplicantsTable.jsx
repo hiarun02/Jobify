@@ -9,12 +9,15 @@ import {
 } from "./ui/table";
 import {Popover, PopoverContent, PopoverTrigger} from "./ui/popover";
 import {MoreHorizontal} from "lucide-react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {toast} from "sonner";
 import {api} from "@/api/api";
+import {setApplications} from "@/redux/applicationSlice";
 
 const ApplicantsTable = () => {
   const statusArr = ["accepted", "rejected"];
+  const dispatch = useDispatch();
+  const {applications} = useSelector((store) => store.applications);
 
   const statusHandler = async (status, id) => {
     try {
@@ -30,13 +33,22 @@ const ApplicantsTable = () => {
       );
       if (res.data.success) {
         toast.success(res.data.message);
+
+        // Update local state so table reflects new status without refresh
+        if (applications?.applications?.length) {
+          const updated = {
+            ...applications,
+            applications: applications.applications.map((app) =>
+              app._id === id ? {...app, status} : app
+            ),
+          };
+          dispatch(setApplications(updated));
+        }
       }
     } catch (error) {
       toast.error(error.response.data.message);
     }
   };
-
-  const {applications} = useSelector((store) => store.applications);
   return (
     <>
       <div className="border rounded-2xl overflow-hidden p-1 bg-gray-50">
@@ -91,7 +103,7 @@ const ApplicantsTable = () => {
                                     statusHandler(status, application?._id)
                                   }
                                 >
-                                  <button className="underline">
+                                  <button className="hover:underline">
                                     {status}
                                   </button>
                                 </div>

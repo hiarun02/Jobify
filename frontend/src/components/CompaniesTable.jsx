@@ -1,18 +1,11 @@
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeader,
-  TableRow,
-  TableCell,
-} from "./ui/table";
 import {Label} from "./ui/label";
 import {Avatar, AvatarImage} from "./ui/avatar";
-import {Popover, PopoverContent, PopoverTrigger} from "./ui/popover";
-import {MoreHorizontal} from "lucide-react";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {Button} from "./ui/button";
+import {Popover, PopoverContent, PopoverTrigger} from "./ui/popover";
+import {MoreHorizontal} from "lucide-react";
 
 const CompaniesTable = () => {
   const {companies, searchCompany} = useSelector((store) => store.company);
@@ -36,53 +29,87 @@ const CompaniesTable = () => {
 
   return (
     <>
-      <div className="">
+      <div>
         <Label className="text-xl font-bold font-mono ">
           Your Registered Company
         </Label>
       </div>
-      <div className="border rounded-2xl overflow-hidden mt-5 bg-gray-50">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Logo</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead>Action</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filterCompanies?.map((company) => (
-              <tr key={company._id}>
-                <TableCell>
-                  <Avatar>
-                    <AvatarImage src={company?.logo}></AvatarImage>
-                  </Avatar>
-                </TableCell>
-                <TableCell> {company.name}</TableCell>
-                <TableCell>{company?.createdAt.split("T")[0]}</TableCell>
-                <TableCell className="cursor-pointer">
-                  <Popover>
-                    <PopoverTrigger>
-                      <MoreHorizontal />
-                    </PopoverTrigger>
-                    <PopoverContent className="w-32">
-                      <div className="flex justify-center">
-                        <button
-                          onClick={() =>
-                            navigate(`/recruiter/company/${company._id}`)
-                          }
-                        >
-                          Edit
-                        </button>
-                      </div>
-                    </PopoverContent>
-                  </Popover>
-                </TableCell>
-              </tr>
-            ))}
-          </TableBody>
-        </Table>
+
+      <div className="mt-5 grid grid-cols-1 gap-4">
+        {filterCompanies?.map((company) => (
+          <div
+            key={company._id}
+            className="border rounded-2xl bg-white  p-4 flex flex-col gap-3 w-full"
+          >
+            <div className="flex justify-end">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="ghost" size="icon" className="h-8 w-8">
+                    <MoreHorizontal className="h-4 w-4" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-40 space-y-2">
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start"
+                    onClick={() =>
+                      navigate(`/recruiter/company/${company._id}`)
+                    }
+                  >
+                    Edit
+                  </Button>
+                  {company?.website && (
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start text-black"
+                      onClick={() => window.open(company.website, "_blank")}
+                    >
+                      Open website
+                    </Button>
+                  )}
+                </PopoverContent>
+              </Popover>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Avatar className="w-12 h-12">
+                <AvatarImage src={company?.logo}></AvatarImage>
+              </Avatar>
+              <div>
+                <p className="font-semibold text-base">{company.name}</p>
+                <p className="text-xs text-gray-500">
+                  Created {company?.createdAt.split("T")[0]}
+                </p>
+              </div>
+            </div>
+
+            {(company?.location || company?.website) && (
+              <div className="flex flex-wrap items-center gap-2 text-xs text-gray-600">
+                {company?.location && (
+                  <span className="px-2 py-1 bg-gray-100 rounded-md border text-gray-700">
+                    {company.location}
+                  </span>
+                )}
+                {company?.website && (
+                  <Button
+                    variant="ghost"
+                    className="h-8 px-3 text-blue-600"
+                    onClick={() => window.open(company.website, "_blank")}
+                  >
+                    Website
+                  </Button>
+                )}
+              </div>
+            )}
+
+            {company?.description && (
+              <p className="text-sm text-gray-700 leading-relaxed line-clamp-3">
+                <span className="font-semibold"> About : </span>{" "}
+                {company.description}
+              </p>
+            )}
+          </div>
+        ))}
       </div>
     </>
   );
