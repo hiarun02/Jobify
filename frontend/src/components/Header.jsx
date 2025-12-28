@@ -46,7 +46,7 @@ const Header = () => {
 
   const {user} = useSelector((store) => store.auth);
   const {savedJobs} = useSelector((store) => store.jobs);
-  console.log(user);
+
   const location = useLocation();
 
   const isActiveLink = (path) => location.pathname === path;

@@ -82,11 +82,11 @@ const JobCard = ({job}) => {
               `${job?.description.slice(0, 50)}...`}
           </p>
         </div>
-        {/* <div className="my-2 mt-2 flex gap-3 text-red-700">
+        <div className="my-2 mt-2 flex gap-3 text-red-700">
           <Badge variant="ghost">{job?.jobType}</Badge>
           <Badge variant="ghost">{job?.salary}</Badge>
           <Badge variant="ghost">{job?.position}</Badge>
-        </div> */}
+        </div>
         <div className="w-full my-2 pt-2">
           <Button
             onClick={() => navigate(`/deatils/${job?._id}`)}

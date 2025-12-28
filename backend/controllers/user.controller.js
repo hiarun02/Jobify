@@ -4,15 +4,9 @@ import jwt from "jsonwebtoken";
 import getDataUri from "../utils/dataUri.js";
 import cloudinary from "../utils/cloudinary.js";
 
-// for regsiter
-// for login
-// for logout
-// for update profile
-
 export const register = async (req, res) => {
   try {
     const {fullName, email, phoneNumber, password, role} = req.body;
-    //   input missing logic
     if (!fullName || !email || !phoneNumber || !password || !role) {
       return res.status(400).json({
         message: "somthing is missing?",
@@ -34,9 +28,8 @@ export const register = async (req, res) => {
     }
 
     // passwordConvertInHas Logic
-
     const hashedPassword = await bcrypt.hash(password, 10);
-    // saved hasdedPassword..
+    // create user
     await User.create({
       fullName,
       email,
@@ -48,7 +41,6 @@ export const register = async (req, res) => {
       },
     });
 
-    // all true
     return res.status(200).json({
       message: "Account created successfully.",
       success: true,
@@ -57,8 +49,6 @@ export const register = async (req, res) => {
     console.log(error.message);
   }
 };
-
-// for Login
 
 export const login = async (req, res) => {
   try {
@@ -151,6 +141,8 @@ export const logout = async (req, res) => {
 export const profileUpdate = async (req, res) => {
   try {
     const {fullName, email, phoneNumber, bio, skills} = req.body;
+
+    const cacheKey = `user:${req.id}:profile`;
 
     // cloudinary to upload file
     const file = req.file;
