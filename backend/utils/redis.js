@@ -1,8 +1,9 @@
 import RedisClient from "ioredis";
 
 const redis = new RedisClient({
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
+  host: "localhost", //  process.env.REDIS_HOST,
+  port: 6379, // process.env.REDIS_PORT,
+
   // password: process.env.REDIS_PASSWORD,
 });
 

@@ -100,7 +100,6 @@ export const login = async (req, res) => {
     });
 
     //   token to store in cookie
-
     user = {
       _id: user._id,
       fullName: user.fullName,
@@ -113,7 +112,7 @@ export const login = async (req, res) => {
     return res
       .status(200)
       .cookie("token", token, {
-        httpsOnly: true,
+        httpOnly: true,
         sameSite: "none",
         secure: true,
       })
@@ -123,7 +122,11 @@ export const login = async (req, res) => {
         success: true,
       });
   } catch (error) {
-    console.log(error.message);
+    console.error("Login error:", error.message);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
   }
 };
 
