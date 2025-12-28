@@ -26,6 +26,7 @@ const Header = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {setJobs} = useSelector((store) => store.jobs);
 
   const logoutHandler = async () => {
     try {
@@ -34,8 +35,11 @@ const Header = () => {
       });
 
       if (res.data.success) {
-        dispatch(setUser(null));
         navigate("/");
+
+        
+        dispatch(setUser(null));
+        setJobs([]);
         toast.success(res.data.message);
       }
     } catch (error) {
@@ -45,7 +49,6 @@ const Header = () => {
   };
 
   const {user} = useSelector((store) => store.auth);
-  const {savedJobs} = useSelector((store) => store.jobs);
 
   const location = useLocation();
 
@@ -109,7 +112,7 @@ const Header = () => {
                                 {user &&
                                 link.name === "Saved Jobs" &&
                                 link.path === "/saved"
-                                  ? `${link.name} (${savedJobs.length})`
+                                  ? `${link.name}`
                                   : link.name}
 
                                 {isActiveLink(link.path) && (

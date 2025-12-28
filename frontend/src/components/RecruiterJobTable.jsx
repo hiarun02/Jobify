@@ -20,6 +20,7 @@ const RecruiterJobTable = () => {
   const {adminAllJobs, jobSearchInput} = useSelector((store) => store.jobs);
 
   const [filterJob, setFilterJobs] = useState(adminAllJobs);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   useEffect(() => {
     const filteredJobs =
@@ -67,7 +68,7 @@ const RecruiterJobTable = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filterJob?.map((job) => (
+            {filterJob?.slice(0, visibleCount).map((job) => (
               <tr key={job._id}>
                 <TableCell>{job?.company?.name}</TableCell>
                 <TableCell> {job?.title}</TableCell>
@@ -116,6 +117,17 @@ const RecruiterJobTable = () => {
           </TableBody>
         </Table>
       </div>
+
+      {filterJob.length > visibleCount && (
+        <div className="flex justify-center mt-4">
+          <button
+            onClick={() => setVisibleCount((prev) => prev + 6)}
+            className="px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+          >
+            Show more jobs
+          </button>
+        </div>
+      )}
     </>
   );
 };

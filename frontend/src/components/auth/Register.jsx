@@ -1,5 +1,5 @@
 import {Input} from "../ui/input";
-import {RadioGroup} from "../ui/radio-group";
+import {RadioGroup, RadioGroupItem} from "../ui/radio-group";
 import {Label} from "../ui/label";
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
@@ -116,30 +116,20 @@ const Register = () => {
               <Label className="block text-gray-700 mb-3">
                 Select Your Role
               </Label>
-              <RadioGroup className="flex">
-                <div className="flex gap-2 border-1 px-5 rounded-3xl shadow-2xs">
-                  <Input
-                    name="role"
-                    value="student"
-                    checked={input.role === "student"}
-                    onChange={handleChange}
-                    type="radio"
-                    className="cursor-pointer"
-                  />
-                  <Label htmlFor="r1" className="text-gray-700">
+              <RadioGroup
+                value={input.role}
+                onValueChange={(value) => setInput({...input, role: value})}
+                className="flex"
+              >
+                <div className="flex gap-2 border-1 px-5 rounded-3xl shadow-2xs items-center">
+                  <RadioGroupItem value="student" id="r1" />
+                  <Label htmlFor="r1" className="text-gray-700 cursor-pointer">
                     Student
                   </Label>
                 </div>
-                <div className="flex gap-2 border-1 px-5 rounded-3xl shadow-2xs">
-                  <Input
-                    type="radio"
-                    name="role"
-                    value="recruiter"
-                    checked={input.role === "recruiter"}
-                    onChange={handleChange}
-                    className="cursor-pointer"
-                  />
-                  <Label htmlFor="r2" className="text-gray-700">
+                <div className="flex gap-2 border-1 px-5 rounded-3xl shadow-2xs items-center py-1.5">
+                  <RadioGroupItem value="recruiter" id="r2" />
+                  <Label htmlFor="r2" className="text-gray-700 cursor-pointer">
                     Recruiter
                   </Label>
                 </div>
