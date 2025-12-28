@@ -60,7 +60,7 @@ const Login = () => {
                 value={input.email}
                 onChange={handleChange}
                 className="w-full"
-                placeholder="demo: user : user123@gmail.com, recruiter : admin123@gmail.com"
+                placeholder="demo: user : user@gmail.com, recruiter : admin@gmail.com"
               />
             </div>
 
