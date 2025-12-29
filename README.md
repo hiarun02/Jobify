@@ -2,10 +2,7 @@
 
 A job portal app where students can find and apply for jobs, and recruiters can post jobs and manage applications.
 
-<img width="1837" height="915" alt="Screenshot 2025-12-28 223053" src="https://github.com/user-attachments/assets/24a7388b-dd75-403c-9af5-642d0f435ccb" />
-
-<img width="1840" height="913" alt="Screenshot 2025-12-28 223151" src="https://github.com/user-attachments/assets/d6f2d0fc-500b-4ce8-9b62-3ae8f14479f6" />
-
+<img width="1836" height="915" alt="Screenshot 2025-12-29 212329" src="https://github.com/user-attachments/assets/856a4f23-d092-42b0-b63e-20b8a2a99a94" />
 
 ## What This App Does
 
