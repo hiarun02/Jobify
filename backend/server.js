@@ -16,7 +16,6 @@ app.use(express.json()); //
 app.use(express.urlencoded({extended: true})); //
 app.use(cookieParser());
 
-//production, development
 const mode = process.env.MODE;
 
 // CORS configuration
@@ -39,22 +38,10 @@ if (mode === "dev") {
 let PORT = process.env.PORT || 3000;
 
 // Apis
-// userApis
 app.use("/api/user", userRoute);
-// company apis
 app.use("/api/company", companyRoute);
-// job api
 app.use("/api/job", jobRoute);
-// application api
 app.use("/api/application", applicationRoute);
-
-// // test redis connection
-// app.get("/test-redis", async (req, res) => {
-//   await redis.set("ping", "pong");
-//   const value = await redis.get("ping");
-
-//   res.json({redis: value});
-// });
 
 app.listen(PORT, () => {
   connectDB();

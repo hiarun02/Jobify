@@ -7,7 +7,6 @@ import {
   TableRow,
   TableCell,
 } from "./ui/table";
-import {SpaceIcon} from "lucide-react";
 
 export const AppliedJobTable = () => {
   const {appliedJobs} = useSelector((store) => store.jobs);

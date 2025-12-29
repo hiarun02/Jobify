@@ -9,11 +9,11 @@ const LatestJobes = () => {
   return (
     <>
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 h-auto mb-10">
-        <dir className="py-10">
+        <div className="py-10">
           <h2 className="font-bold lg:text-2xl md:text-2xl sm:text-2xl bg-red-700 text-white py-1 px-4 rounded-md  text-center">
-            #Latest Job Openings
+            Latest Job Openings
           </h2>
-        </dir>
+        </div>
         <div className="grid  gap-6 lg:grid-cols-3 md:grid-cols-2 ">
           {latestJobs.map((job) => (
             <div key={job?._id}>

@@ -13,6 +13,7 @@ const Header = () => {
   const UserNavLinks = [
     {name: "Home", path: "/"},
     {name: "Explore Jobs", path: "/jobs"},
+    {name: "Applied Jobs", path: "/applied-jobs"},
     {name: "Saved Jobs", path: "/saved"},
   ];
 
@@ -37,7 +38,6 @@ const Header = () => {
       if (res.data.success) {
         navigate("/");
 
-        
         dispatch(setUser(null));
         setJobs([]);
         toast.success(res.data.message);
@@ -57,7 +57,9 @@ const Header = () => {
   // Only show Saved Jobs when a user is logged in
   const visibleUserLinks = user
     ? UserNavLinks
-    : UserNavLinks.filter((l) => l.name !== "Saved Jobs");
+    : UserNavLinks.filter(
+        (l) => l.name !== "Saved Jobs" && l.name !== "Applied Jobs"
+      );
 
   return (
     <>

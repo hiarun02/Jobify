@@ -14,6 +14,7 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {api} from "@/api/api";
 import {toast} from "sonner";
+import {Button} from "./ui/button";
 
 const RecruiterJobTable = () => {
   const navigate = useNavigate();
@@ -80,34 +81,26 @@ const RecruiterJobTable = () => {
                     </PopoverTrigger>
                     <PopoverContent className="w-32">
                       <div className="flex flex-col gap-2">
-                        <button>
-                          <span
-                            className="hover:underline"
-                            onClick={() =>
-                              navigate(`/recruiter/job/${job?._id}/applicants`)
-                            }
-                          >
-                            Applicants
-                          </span>
-                        </button>
-                        <button>
-                          <span
-                            className="hover:underline"
-                            onClick={() =>
-                              navigate(`/recruiter/job/${job?._id}`)
-                            }
-                          >
-                            Update
-                          </span>
-                        </button>
-                        <button>
-                          <span
-                            className="hover:underline"
-                            onClick={() => handleDelete(job?._id)}
-                          >
-                            Delete
-                          </span>
-                        </button>
+                        <Button
+                          variant="link"
+                          onClick={() =>
+                            navigate(`/recruiter/job/${job?._id}/applicants`)
+                          }
+                        >
+                          Applicants
+                        </Button>
+                        <Button
+                          variant="link"
+                          onClick={() => navigate(`/recruiter/job/${job?._id}`)}
+                        >
+                          Update
+                        </Button>
+                        <Button
+                          variant="link"
+                          onClick={() => handleDelete(job?._id)}
+                        >
+                          Delete
+                        </Button>
                       </div>
                     </PopoverContent>
                   </Popover>

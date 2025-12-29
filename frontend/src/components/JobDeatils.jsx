@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 
 import {Button} from "./ui/button";
-import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {setSingalJob} from "@/redux/jobSlice";
 import {toast} from "sonner";
 import {api} from "@/api/api";
+import {useParams} from "react-router-dom";
 
 const JobDeatils = () => {
   const {singalJob} = useSelector((store) => store.jobs);

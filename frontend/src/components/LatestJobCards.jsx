@@ -33,6 +33,7 @@ const LatestJobCards = ({job, key}) => {
         <Badge variant="ghost">{job?.salary}</Badge>
         <Badge variant="ghost">{job?.position}</Badge>
       </div>
+
       <div className="w-full my-2 pt-2">
         <Button
           onClick={() => navigate(`/deatils/${job?._id}`)}
