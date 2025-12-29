@@ -41,36 +41,6 @@ const CompaniesTable = () => {
             key={company._id}
             className="border rounded-2xl bg-white  p-4 flex flex-col gap-3 w-full"
           >
-            <div className="flex justify-end">
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-8 w-8">
-                    <MoreHorizontal className="h-4 w-4" />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-40 space-y-2">
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start"
-                    onClick={() =>
-                      navigate(`/recruiter/company/${company._id}`)
-                    }
-                  >
-                    Edit
-                  </Button>
-                  {company?.website && (
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start text-black"
-                      onClick={() => window.open(company.website, "_blank")}
-                    >
-                      Open website
-                    </Button>
-                  )}
-                </PopoverContent>
-              </Popover>
-            </div>
-
             <div className="flex items-center gap-3">
               <Avatar className="w-12 h-12">
                 <AvatarImage src={company?.logo}></AvatarImage>
@@ -80,6 +50,26 @@ const CompaniesTable = () => {
                 <p className="text-xs text-gray-500">
                   Created {company?.createdAt.split("T")[0]}
                 </p>
+              </div>
+              <div className="flex justify-end w-fit border rounded">
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button variant="ghost" size="icon" className="h-8 w-8">
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-40 ">
+                    <Button
+                      variant="link"
+                      className="w-full justify-start"
+                      onClick={() =>
+                        navigate(`/recruiter/company/${company._id}`)
+                      }
+                    >
+                      Edit
+                    </Button>
+                  </PopoverContent>
+                </Popover>
               </div>
             </div>
 
@@ -92,8 +82,8 @@ const CompaniesTable = () => {
                 )}
                 {company?.website && (
                   <Button
-                    variant="ghost"
-                    className="h-8 px-3 text-blue-600"
+                    variant="link"
+                    className="h-8 px-3 text-red-600"
                     onClick={() => window.open(company.website, "_blank")}
                   >
                     Website

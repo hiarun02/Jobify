@@ -6,6 +6,7 @@ import useGetAllJobs from "@/hooks/useGetAllJobs";
 import useGetSavedJobs from "@/hooks/useGetSavedJobs";
 import {api} from "@/api/api";
 import {setSavedJobs} from "@/redux/jobSlice";
+import {Button} from "../ui/button";
 
 const Jobs = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -108,12 +109,12 @@ const Jobs = () => {
 
           {!isLoading && filterJob.length > visibleJobs.length && (
             <div className="flex justify-center mt-6">
-              <button
+              <Button
                 onClick={handleLoadMore}
-                className="px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                className=" px-5 bg-red-600 text-white rounded-lg hover:bg-red-700"
               >
-                Load more jobs
-              </button>
+                Load more
+              </Button>
             </div>
           )}
         </div>

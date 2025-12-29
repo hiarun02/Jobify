@@ -31,14 +31,14 @@ const HeroSection = () => {
             </p>
             {/* CTA buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
-              <Link to="/jobs">
-                <Button className="bg-red-600 hover:bg-red-700 text-white px-8 ">
+              <Link to="/jobs" className="w-full sm:w-auto">
+                <Button className="bg-red-600 hover:bg-red-700 text-white px-8 w-full sm:w-auto">
                   Explore Jobs
                   <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
-              <Link to="/register">
-                <Button variant="outline" className="">
+              <Link to="/register" className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full sm:w-auto">
                   Get Started Free
                 </Button>
               </Link>

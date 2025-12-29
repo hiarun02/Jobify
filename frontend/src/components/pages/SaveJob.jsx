@@ -13,6 +13,7 @@ const SaveJob = () => {
   const dispatch = useDispatch();
   const {savedJobs} = useSelector((store) => store.jobs);
   const [isLoading, setIsLoading] = useState(true);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   useEffect(() => {
     const fetchSavedJobs = async () => {
@@ -49,6 +50,12 @@ const SaveJob = () => {
     }
   };
 
+  const visibleJobs = savedJobs.slice(0, visibleCount);
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 6);
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-5 py-5">
       {isLoading ? (
@@ -56,13 +63,13 @@ const SaveJob = () => {
           Loading...
         </h2>
       ) : (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {!savedJobs.length ? (
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 ">
+          {!visibleJobs.length ? (
             <h2 className="flex justify-center items-center w-7xl h-[40vh]">
               Saved Job Not Found
             </h2>
           ) : (
-            savedJobs.map((job) => {
+            visibleJobs.map((job) => {
               return (
                 <div
                   key={job._id}
@@ -120,6 +127,16 @@ const SaveJob = () => {
             })
           )}
         </ul>
+      )}
+      {!isLoading && savedJobs.length > visibleJobs.length && (
+        <div className="flex justify-center mt-5">
+          <Button
+            onClick={handleLoadMore}
+            className=" px-5 bg-red-600 text-white rounded-lg hover:bg-red-700"
+          >
+            Load more
+          </Button>
+        </div>
       )}
     </div>
   );

@@ -5,12 +5,10 @@ import {Badge} from "../ui/badge";
 import UpdateProfileDialog from "../UpdateProfileDialog";
 import {useState} from "react";
 import {Label} from "../ui/label";
-import {AppliedJobTable} from "../AppliedJobTable";
+// import {AppliedJobTable} from "../AppliedJobTable";
 import {useSelector} from "react-redux";
-import useGetAppliedJobs from "@/hooks/useGetAppliedJobs";
 
 const Profile = () => {
-  useGetAppliedJobs();
   const [open, setOpen] = useState(false);
 
   const {user} = useSelector((store) => store.auth);
@@ -36,9 +34,9 @@ const Profile = () => {
                 <Button
                   onClick={() => setOpen(true)}
                   variant="outline"
-                  className="bg-red-600  text-white rounded-md shadow-sm hover:bg-red-700 hover:text-white transition duration-200"
+                  className=""
                 >
-                  <Pen />
+                  <Pen className="text-black" />
                 </Button>
               </div>
             </div>
@@ -86,8 +84,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-
-      {/* Applied Job application */}
+      {/* Applied Job application
       <div className="mt-10  h-auto border-2 border-gray-100 rounded-2xl shadow-1xl p-5">
         <h2 className="font-bold lg:text-2xl md:text-2xl sm:text-2xl bg-red-700 text-white py-1 px-4 rounded-md  text-center mb-5">
           #Applied Jobs
@@ -95,7 +92,7 @@ const Profile = () => {
         <div className="">
           <AppliedJobTable />
         </div>
-      </div>
+      </div> */}
       <UpdateProfileDialog open={open} setOpen={setOpen} />
     </div>
   );
