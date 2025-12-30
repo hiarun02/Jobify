@@ -8,7 +8,7 @@ const useGetAppliedJobs = () => {
   useEffect(() => {
     const fetchAppliedJobs = async () => {
       try {
-        const res = await api.get(`/api/application/get`, {
+        const res = await api.get(`/api/v1/application/get`, {
           withCredentials: true,
         });
 

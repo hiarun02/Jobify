@@ -32,7 +32,7 @@ const Jobs = () => {
   useEffect(() => {
     const handleFocus = async () => {
       try {
-        const res = await api.get(`/api/job/get-saved-jobs`, {
+        const res = await api.get(`/api/v1/job/get-saved-jobs`, {
           withCredentials: true,
         });
         if (res.data.success) {
@@ -47,8 +47,8 @@ const Jobs = () => {
     return () => window.removeEventListener("focus", handleFocus);
   }, [dispatch]);
 
-  const [filterJob, setFilterJob] = useState(allJobs);
-  const visibleJobs = filterJob.slice(0, visibleCount);
+  const [filterJob, setFilterJob] = useState(null);
+  const visibleJobs = filterJob?.slice(0, visibleCount) || [];
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 6);
@@ -56,6 +56,11 @@ const Jobs = () => {
 
   // Filter and Search Logic
   useEffect(() => {
+    if (!allJobs || allJobs.length === 0) {
+      setFilterJob([]);
+      return;
+    }
+
     let filteredJobs = allJobs;
 
     // Apply filter query
@@ -93,7 +98,7 @@ const Jobs = () => {
             <div className="flex justify-center items-center h-[40vh]">
               <span className="text-lg text-gray-600">Loading jobs...</span>
             </div>
-          ) : filterJob.length <= 0 ? (
+          ) : !filterJob || filterJob.length === 0 ? (
             <div className="flex justify-center items-center h-full">
               <span className="text-2xl font-mono">Job Not Found!</span>
             </div>
@@ -107,7 +112,7 @@ const Jobs = () => {
             </ul>
           )}
 
-          {!isLoading && filterJob.length > visibleJobs.length && (
+          {!isLoading && filterJob && filterJob.length > visibleJobs.length && (
             <div className="flex justify-center mt-6">
               <Button
                 onClick={handleLoadMore}

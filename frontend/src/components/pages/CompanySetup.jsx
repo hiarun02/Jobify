@@ -49,12 +49,16 @@ const CompanySetup = () => {
     }
 
     try {
-      const res = await api.put(`/api/company/update/${params.id}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        withCredentials: true,
-      });
+      const res = await api.put(
+        `/api/v1/company/update/${params.id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
 
       if (res.data.success) {
         toast.success(res.data.message);

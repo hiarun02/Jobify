@@ -14,9 +14,12 @@ const Applicants = () => {
   useEffect(() => {
     const fetchedApplicants = async () => {
       try {
-        const res = await api.get(`/api/application/${params.id}/applicants`, {
-          withCredentials: true,
-        });
+        const res = await api.get(
+          `/api/v1/application/${params.id}/applicants`,
+          {
+            withCredentials: true,
+          }
+        );
 
         if (res.data.success) {
           dispatch(setApplications(res.data.job));

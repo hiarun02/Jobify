@@ -31,7 +31,7 @@ const Header = () => {
 
   const logoutHandler = async () => {
     try {
-      const res = await api.get(`/api/user/logout`, {
+      const res = await api.get(`/api/v1/user/logout`, {
         withCredentials: true,
       });
 

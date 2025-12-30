@@ -9,7 +9,7 @@ const useGetSingalJobById = (jobId) => {
   useEffect(() => {
     const fetchSingalJob = async () => {
       try {
-        const res = await api.get(`/api/job/get/${jobId}`, {
+        const res = await api.get(`/api/v1/job/get/${jobId}`, {
           withCredentials: true,
         });
         if (res.data.success) {

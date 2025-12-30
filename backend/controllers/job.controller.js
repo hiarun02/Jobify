@@ -53,6 +53,10 @@ export const postJob = async (req, res) => {
     });
   } catch (error) {
     console.log(error.message);
+    return res.status(500).json({
+      message: "Server error",
+      success: false,
+    });
   }
 };
 
@@ -75,7 +79,7 @@ export const getAllJob = async (req, res) => {
       .sort({createdAt: -1})
       .lean();
 
-    await setCache(cacheKey, jobs, 60);
+    await setCache(cacheKey, jobs, 300);
 
     // Respond once
     return res.status(200).json({
@@ -110,6 +114,10 @@ export const getJobById = async (req, res) => {
     });
   } catch (error) {
     console.log(error.message);
+    return res.status(500).json({
+      message: "Server error",
+      success: false,
+    });
   }
 };
 
@@ -252,7 +260,7 @@ export const getAdminJobs = async (req, res) => {
       path: "company",
     });
 
-    await setCache(cacheKey, jobs, 60);
+    await setCache(cacheKey, jobs, 180);
 
     if (!jobs) {
       return res.status(404).json({
@@ -268,6 +276,10 @@ export const getAdminJobs = async (req, res) => {
     });
   } catch (error) {
     console.log(error.message);
+    return res.status(500).json({
+      message: "Server error",
+      success: false,
+    });
   }
 };
 

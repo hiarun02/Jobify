@@ -38,10 +38,10 @@ if (mode === "dev") {
 let PORT = process.env.PORT || 3000;
 
 // Apis
-app.use("/api/user", userRoute);
-app.use("/api/company", companyRoute);
-app.use("/api/job", jobRoute);
-app.use("/api/application", applicationRoute);
+app.use("/api/v1/user", userRoute);
+app.use("/api/v1/company", companyRoute);
+app.use("/api/v1/job", jobRoute);
+app.use("/api/v1/application", applicationRoute);
 
 app.listen(PORT, () => {
   connectDB();

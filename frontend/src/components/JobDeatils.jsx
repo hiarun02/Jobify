@@ -21,7 +21,7 @@ const JobDeatils = () => {
   useEffect(() => {
     const getSingalJob = async () => {
       try {
-        const res = await api.get(`/api/job/get/${jobId}`, {
+        const res = await api.get(`/api/v1/job/get/${jobId}`, {
           withCredentials: true,
         });
         if (res.data.success) {
@@ -42,7 +42,7 @@ const JobDeatils = () => {
   // this wroks when user click
   const jObApplyHandler = async () => {
     try {
-      const res = await api.get(`api/application/apply/${jobId}`, {
+      const res = await api.get(`/api/v1/application/apply/${jobId}`, {
         withCredentials: true,
       });
 

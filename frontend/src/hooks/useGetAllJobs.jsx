@@ -1,5 +1,5 @@
 import {api} from "@/api/api";
-import {setAllJobs} from "@/redux/jobSlice";
+import {setAllJobs, setJobsLoading} from "@/redux/jobSlice";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 
@@ -9,7 +9,8 @@ const useGetAllJobs = () => {
   useEffect(() => {
     const getAllJobs = async () => {
       try {
-        const res = await api.get(`/api/job/get`, {
+        dispatch(setJobsLoading(true));
+        const res = await api.get(`/api/v1/job/get`, {
           withCredentials: true,
         });
         if (res.data.success) {
@@ -17,6 +18,8 @@ const useGetAllJobs = () => {
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        dispatch(setJobsLoading(false));
       }
     };
     getAllJobs();

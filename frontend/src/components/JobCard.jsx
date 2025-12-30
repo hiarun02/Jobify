@@ -30,7 +30,7 @@ const JobCard = ({job}) => {
     // console.log(jobId);
     try {
       const res = await api.post(
-        `/api/job/saved`,
+        `/api/v1/job/saved`,
         {jobId},
         {withCredentials: true}
       );

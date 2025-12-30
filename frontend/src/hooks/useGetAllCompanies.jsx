@@ -8,7 +8,7 @@ const useGetAllCompanies = () => {
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const res = await api.get(`/api/company/get`, {
+        const res = await api.get(`/api/v1/company/get`, {
           withCredentials: true,
         });
 

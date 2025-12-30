@@ -1,8 +1,9 @@
 import {useSelector} from "react-redux";
 import LatestJobCards from "./LatestJobCards";
+import SkeletonCard from "./SkeletonCard";
 
 const LatestJobes = () => {
-  const {allJobs} = useSelector((store) => store.jobs);
+  const {allJobs, jobsLoading} = useSelector((store) => store.jobs);
 
   const latestJobs = allJobs.slice(0, 9);
 
@@ -15,11 +16,21 @@ const LatestJobes = () => {
           </h2>
         </div>
         <div className="grid  gap-6 lg:grid-cols-3 md:grid-cols-2 ">
-          {latestJobs.map((job) => (
-            <div key={job?._id}>
-              <LatestJobCards job={job} />
-            </div>
-          ))}
+          {jobsLoading
+            ? // Show skeleton cards while loading
+              Array(9)
+                .fill(null)
+                .map((_, index) => (
+                  <div key={index}>
+                    <SkeletonCard />
+                  </div>
+                ))
+            : // Show actual job cards when loaded
+              latestJobs.map((job) => (
+                <div key={job?._id}>
+                  <LatestJobCards job={job} />
+                </div>
+              ))}
         </div>
       </div>
     </>
