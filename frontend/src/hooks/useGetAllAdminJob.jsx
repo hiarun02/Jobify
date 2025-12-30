@@ -8,7 +8,7 @@ const useGetAllAdminJob = () => {
   useEffect(() => {
     const fetchAdminJobs = async () => {
       try {
-        const res = await api.get(`/api/job/adminjob`, {
+        const res = await api.get(`/api/v1/job/adminjob`, {
           withCredentials: true,
         });
 

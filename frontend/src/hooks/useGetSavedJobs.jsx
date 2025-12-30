@@ -9,7 +9,7 @@ const useGetSavedJobs = () => {
   useEffect(() => {
     const getSavedJobs = async () => {
       try {
-        const res = await api.get(`/api/job/get-saved-jobs`, {
+        const res = await api.get(`/api/v1/job/get-saved-jobs`, {
           withCredentials: true,
         });
         if (res.data.success) {

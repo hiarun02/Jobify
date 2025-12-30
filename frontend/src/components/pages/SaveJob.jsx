@@ -7,6 +7,7 @@ import {Button} from "../ui/button";
 import {Avatar, AvatarImage} from "@radix-ui/react-avatar";
 import {useNavigate} from "react-router-dom";
 import {toast} from "sonner";
+import SavedJobSkeletonCard from "../SavedJobSkeletonCard";
 
 const SaveJob = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const SaveJob = () => {
     const fetchSavedJobs = async () => {
       try {
         const res = await api.get(
-          `/api/job/get-saved-jobs`,
+          `/api/v1/job/get-saved-jobs`,
 
           {
             withCredentials: true,
@@ -38,7 +39,7 @@ const SaveJob = () => {
   const handleDeleteSavedJob = async (jobId) => {
     try {
       const res = await api.post(
-        `/api/job/delete-saved-job`,
+        `/api/v1/job/delete-saved-job`,
         {jobId},
         {withCredentials: true}
       );
@@ -59,9 +60,15 @@ const SaveJob = () => {
   return (
     <div className="max-w-7xl mx-auto px-5 py-5">
       {isLoading ? (
-        <h2 className="flex justify-center items-center w-full h-[40vh] text-gray-600">
-          Loading...
-        </h2>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {Array(6)
+            .fill(null)
+            .map((_, index) => (
+              <li key={index} className="list-none">
+                <SavedJobSkeletonCard />
+              </li>
+            ))}
+        </ul>
       ) : (
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 ">
           {!visibleJobs.length ? (

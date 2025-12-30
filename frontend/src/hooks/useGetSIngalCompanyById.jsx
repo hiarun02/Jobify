@@ -9,7 +9,7 @@ const useGetSingalCompanyById = (companyId) => {
   useEffect(() => {
     const fetchSingalCompany = async () => {
       try {
-        const res = await api.get(`/api/company/get/${companyId}`, {
+        const res = await api.get(`/api/v1/company/get/${companyId}`, {
           withCredentials: true,
         });
         if (res.data.success) {

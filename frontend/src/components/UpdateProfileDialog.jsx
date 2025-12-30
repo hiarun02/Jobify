@@ -52,7 +52,7 @@ const UpdateProfileDialog = ({open, setOpen}) => {
     }
 
     try {
-      const res = await api.post(`$/api/user/profile/update`, formData, {
+      const res = await api.post(`/api/v1/user/profile/update`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

@@ -56,7 +56,7 @@ const JobPost = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await api.post(`/api/job/post`, input, {
+      const res = await api.post(`/api/v1/job/post`, input, {
         headers: {
           "Content-Type": "application/json",
         },

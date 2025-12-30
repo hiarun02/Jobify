@@ -1,6 +1,7 @@
 import {Company} from "../models/company.model.js";
 import cloudinary from "../utils/cloudinary.js";
 import getDataUri from "../utils/dataUri.js";
+import {deleteCache, getCache, setCache} from "../utils/cache.js";
 
 export const registerCompany = async (req, res) => {
   try {
@@ -25,6 +26,8 @@ export const registerCompany = async (req, res) => {
       userId: req.id,
     });
 
+    await deleteCache(`companies:${req.id}`);
+
     return res.status(201).json({
       message: "company Name register successfully...",
       company,
@@ -32,6 +35,10 @@ export const registerCompany = async (req, res) => {
     });
   } catch (error) {
     console.log(error.message);
+    return res.status(500).json({
+      message: "Server error",
+      success: false,
+    });
   }
 };
 
@@ -40,6 +47,18 @@ export const registerCompany = async (req, res) => {
 export const getCompany = async (req, res) => {
   try {
     const userId = req.id;
+    const cacheKey = `companies:${userId}`;
+
+    // Check cache first
+    const cache = await getCache(cacheKey);
+    if (cache) {
+      return res.status(200).json({
+        companies: cache,
+        success: true,
+        fromCache: true,
+      });
+    }
+
     const companies = await Company.find({userId});
 
     if (!companies) {
@@ -48,12 +67,20 @@ export const getCompany = async (req, res) => {
         success: false,
       });
     }
+
+    await setCache(cacheKey, companies, 600);
+
     return res.status(200).json({
       companies,
       success: true,
+      fromCache: false,
     });
   } catch (error) {
     console.log(error.message);
+    return res.status(500).json({
+      message: "Server error",
+      success: false,
+    });
   }
 };
 
@@ -62,6 +89,18 @@ export const getCompany = async (req, res) => {
 export const getCompanyById = async (req, res) => {
   try {
     const companyId = req.params.id;
+    const cacheKey = `company:${companyId}`;
+
+    // Check cache first
+    const cache = await getCache(cacheKey);
+    if (cache) {
+      return res.status(200).json({
+        company: cache,
+        success: true,
+        fromCache: true,
+      });
+    }
+
     const company = await Company.findById(companyId);
 
     if (!company) {
@@ -71,12 +110,19 @@ export const getCompanyById = async (req, res) => {
       });
     }
 
+    await setCache(cacheKey, company, 600);
+
     return res.status(200).json({
       company,
       success: true,
+      fromCache: false,
     });
   } catch (error) {
     console.log(error.message);
+    return res.status(500).json({
+      message: "Server error",
+      success: false,
+    });
   }
 };
 
@@ -113,6 +159,9 @@ export const updateCompany = async (req, res) => {
       });
     }
 
+    await deleteCache(`companies:${req.id}`);
+    await deleteCache(`company:${req.params.id}`);
+
     return res.status(200).json({
       message: "Company info updated...",
 
@@ -120,5 +169,9 @@ export const updateCompany = async (req, res) => {
     });
   } catch (error) {
     console.log(error.message);
+    return res.status(500).json({
+      message: "Server error",
+      success: false,
+    });
   }
 };

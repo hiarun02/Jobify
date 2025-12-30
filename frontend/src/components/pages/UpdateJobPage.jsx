@@ -41,7 +41,7 @@ const UpdateJobPage = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await api.patch(`/api/job/update/${params.id}`, input, {
+      const res = await api.patch(`/api/v1/job/update/${params.id}`, input, {
         headers: {
           "Content-Type": "application/json",
         },

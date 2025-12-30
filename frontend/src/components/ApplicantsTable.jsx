@@ -22,7 +22,7 @@ const ApplicantsTable = () => {
   const statusHandler = async (status, id) => {
     try {
       const res = await api.post(
-        `/api/application/status/${id}/update`,
+        `/api/v1/application/status/${id}/update`,
         {
           status,
         },

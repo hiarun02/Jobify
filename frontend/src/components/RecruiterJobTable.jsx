@@ -25,13 +25,16 @@ const RecruiterJobTable = () => {
 
   useEffect(() => {
     const filteredJobs =
-      adminAllJobs.length >= 0 &&
-      adminAllJobs.filter((job) => {
-        if (!jobSearchInput) {
-          return true;
-        }
-        return job?.title?.toLowerCase().includes(jobSearchInput.toLowerCase());
-      });
+      adminAllJobs && adminAllJobs.length >= 0
+        ? adminAllJobs.filter((job) => {
+            if (!jobSearchInput) {
+              return true;
+            }
+            return job?.title
+              ?.toLowerCase()
+              .includes(jobSearchInput.toLowerCase());
+          })
+        : [];
     setFilterJobs(filteredJobs);
   }, [jobSearchInput, adminAllJobs]);
 
@@ -39,7 +42,7 @@ const RecruiterJobTable = () => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await api.delete(`/api/job/delete/${id}`, {
+      const res = await api.delete(`/api/v1/job/delete/${id}`, {
         withCredentials: true,
       });
       if (res.data.success) {

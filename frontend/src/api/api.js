@@ -9,7 +9,7 @@ export const api = axios.create({
 // register
 
 export const RegisterHandler = async (formData) => {
-  return await api.post(`/api/user/register`, formData, {
+  return await api.post(`/api/v1/user/register`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -19,7 +19,7 @@ export const RegisterHandler = async (formData) => {
 
 // login
 export const LoginHandler = async (input) => {
-  return await api.post(`/api/user/login`, input, {
+  return await api.post(`/api/v1/user/login`, input, {
     headers: {
       "Content-Type": "application/json",
     },
